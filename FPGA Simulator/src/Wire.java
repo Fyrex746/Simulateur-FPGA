@@ -14,6 +14,7 @@ public class Wire {
 		setcomponentB(componentB,inputIndex);
 		transfertSignal();	//Rajouté
 	}
+	
 	public boolean getValue(){
 		return transmitedValue;
 	}
