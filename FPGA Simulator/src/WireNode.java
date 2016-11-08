@@ -26,7 +26,7 @@ public class WireNode extends Component{
 			outputsWires[i] = tempOutputsWires[i];
 		}
 		updateOutputs();
-		//BUG!!
+		//BUG, TOOOONS OF BUGS!!!
 		outputsWires[] = new Wire(this,tempOutputsWires.length,component,inputIndex);
 		
 	}	
