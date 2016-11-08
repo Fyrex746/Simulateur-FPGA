@@ -23,6 +23,7 @@ public class WireNode extends Component{
 		}
 		updateOutputs();
 		Wire wire = new Wire(this,tempOutputsWires.length,component,inputIndex);
+		
 	}
 	
 	public void deleteConnection(Component component, int inputIndex){

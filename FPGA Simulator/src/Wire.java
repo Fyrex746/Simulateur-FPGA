@@ -12,14 +12,14 @@ public class Wire {
 	Wire(Component componentA,int outputIndex,Component componentB,int inputIndex){
 		setcomponentA(componentA,outputIndex);
 		setcomponentB(componentB,inputIndex);
-		transfertSignal();	//Rajouté
+		transfertSignal();
 	}
 	
 	public boolean getValue(){
 		return transmitedValue;
 	}
 	public void setcomponentA(Component component,int index){
-		if(component != componentA){
+		if(component != componentA && componentA != null){
 			componentA.outputsWires[outputIndex] = null;
 		}
 		componentA = component;
@@ -27,7 +27,7 @@ public class Wire {
 		componentA.outputsWires[outputIndex] = this;
 	}
 	public void setcomponentB(Component component,int index){
-		if(component != componentB){
+		if(component != componentB && componentB != null){
 			componentB.inputsWires[inputIndex] = null;
 		}
 		componentB = component;
