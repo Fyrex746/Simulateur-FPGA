@@ -5,6 +5,10 @@ public class WireNode extends Component{
 		super(1, numberOfOutputs);
 	}
 	
+	WireNode(Component componentA,int outputIndex ) {
+		super(1, 1);
+	}
+	
 	protected void updateOutputs(){
 		for(int i=0; i<outputs.length; i++){
 			setOutput(inputs[0], i);
@@ -22,10 +26,10 @@ public class WireNode extends Component{
 			outputsWires[i] = tempOutputsWires[i];
 		}
 		updateOutputs();
-		Wire wire = new Wire(this,tempOutputsWires.length,component,inputIndex);
+		//BUG!!
+		outputsWires[] = new Wire(this,tempOutputsWires.length,component,inputIndex);
 		
-	}
-	
+	}	
 	public void deleteConnection(Component component, int inputIndex){
 		numberOfOutputs -= 1;
 		outputs = new boolean[numberOfOutputs];

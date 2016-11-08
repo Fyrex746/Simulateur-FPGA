@@ -7,8 +7,13 @@ public class Main {
 		Mux2v1 muxtest= new Mux2v1();
 		muxtest.setInputs("100");
 		
+		WireNode node = new WireNode()
+		
 		Mux2v1 mux2 = new Mux2v1();
 		mux2.setInputs("111");
+		
+		Mux2v1 mux3 = new Mux2v1();
+		mux3.setInputs("111");
 	
 		Wire muxtest_mux2 = new Wire(muxtest,0,mux2,0);
 		
