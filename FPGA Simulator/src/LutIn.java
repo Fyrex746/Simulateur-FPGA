@@ -7,6 +7,7 @@ public class LutIn extends Component{
 	LutIn(int i) {
 		super(i, 1);
 		connection=new boolean[i];
+		updateOutputs();
 	}
 	
 	protected void updateOutputs(){

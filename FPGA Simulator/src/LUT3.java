@@ -1,35 +1,49 @@
 
 public class LUT3 extends Component{
 
-	protected boolean tab[];
+	protected boolean[] tab= new boolean[8];
 	private int temporaire;
-	private int i;
 	
 	LUT3() {
 		super(3, 1);
 		tab = new boolean[8];
-	}
+		updateOutputs();
+		}
 	
 	protected void updateOutputs(){
-//		temporaire=boolToBin(inputs[2])*4+boolToBin(inputs[1])*2+boolToBin(inputs[0]);
 		temporaire=0;
-//		for (i=0;i<3;i++){
-//			if(inputs[i]){
-//				temporaire+=Math.pow(2,i);
-//			}
-//		}
-		//System.out.println(temporaire);
-		if(inputs[2]) temporaire+=4;
+		if(inputs[0]) temporaire+=4; //MSB sur la case 0
 		if(inputs[1]) temporaire+=2;
-		if(inputs[0]) temporaire+=1;
-		System.out.println(temporaire);
-		System.out.println(tab[temporaire]);
+		if(inputs[2]) temporaire+=1;//LSB sur la case 2
 		setOutput(tab[temporaire],0);
 	}
 	
 	protected void setVal(boolean value, int index){
 		//Change la valeur index du tableau
 		tab[index] = value;
+		updateOutputs();
+	}
+	public void setVals(String str){
+		if(str.length() == 8){
+			setVals(str,0);
+		}else{
+			System.out.println("Incorrect lenght of Inputs string");
+		}
+	}
+	public void setVals(String str,int beginningIndex){
+		if(beginningIndex + str.length() <= 8){
+			for(int i=beginningIndex; i<beginningIndex+str.length(); i++){
+				if(str.charAt(i) == '1'){
+					tab[i] = true;
+				}else if(str.charAt(i) == '0'){
+					tab[i] = false;
+				}else{
+					System.out.println("Incorrect caracter in Inputs string");
+				}
+			}
+		}else{
+			System.out.println("Incorrect lenght of Inputs string");
+		}
 		updateOutputs();
 	}
 }
