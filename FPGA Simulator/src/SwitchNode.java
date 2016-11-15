@@ -7,6 +7,8 @@ public class SwitchNode extends Component {
 		updateOutputs();
 	}
 	
+	//Test
+	
 	protected void updateOutputs(){
 		setOutput(inputs[0],0);
 		if (interrupteur) setOutput(inputs[0],1);
