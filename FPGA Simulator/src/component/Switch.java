@@ -14,13 +14,13 @@ public class Switch extends Component {
 		else setOutput(false,0);
 	}
 	
-	public void interruption(){
+	public void switchEtat(){
 		if(etat) etat=false;
 		else etat=true;
 		updateOutputs();
 	}
 	
-	public void interruption(boolean val){
+	public void setEtat(boolean val){
 		etat=val;
 		updateOutputs();
 	}
