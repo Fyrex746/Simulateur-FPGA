@@ -13,11 +13,11 @@ public class SwitchNode extends Component {
 		if (interrupteur) setOutput(inputs[0],1);
 		else setOutput(false,1);
 	}
-	public void switchEtat(boolean valeur){
+	public void setEtat(boolean valeur){
 		interrupteur=valeur;
 		updateOutputs();
 	}
-	public void setEtat(){
+	public void switchEtat(){
 		if (interrupteur) interrupteur=false;
 		else interrupteur=true;
 		updateOutputs();
