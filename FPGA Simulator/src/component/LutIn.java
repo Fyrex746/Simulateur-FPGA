@@ -1,3 +1,4 @@
+package component;
 
 public class LutIn extends Component{
 

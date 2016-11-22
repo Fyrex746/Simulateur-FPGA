@@ -1,3 +1,4 @@
+package component;
 //import java.util.*;
 
 
@@ -19,7 +20,6 @@ abstract class Component {
 		numberOfOutputs = o;
 		outputs = new boolean[numberOfOutputs];
 		outputsWires = new Wire[numberOfOutputs];
-		updateOutputs();
 	}
 
 	//Inputs functions

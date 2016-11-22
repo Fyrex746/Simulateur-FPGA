@@ -1,8 +1,9 @@
+package component;
 //import java.util.*;
 
 public class Mux2v1 extends Component {
 
-	Mux2v1() {
+	public Mux2v1() {
 		super(3, 1);
 	}
 	
