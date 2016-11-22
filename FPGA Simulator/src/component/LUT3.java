@@ -19,7 +19,7 @@ public class LUT3 extends Component{
 		setOutput(tab[temporaire],0);
 	}
 	
-	protected void setVal(boolean value, int index){
+	public void setVal(boolean value, int index){
 		//Change la valeur index du tableau
 		tab[index] = value;
 		updateOutputs();
