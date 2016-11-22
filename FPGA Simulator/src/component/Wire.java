@@ -1,3 +1,4 @@
+package component;
 //import java.util.*;
 
 public class Wire {

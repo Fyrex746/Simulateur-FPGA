@@ -1,3 +1,4 @@
+package component;
 
 public class LutIn extends Component{
 
@@ -14,7 +15,7 @@ public class LutIn extends Component{
 		setOutput(inputs[selIn],0);
 	}
 	
-	public void connectLut(int index){
+	protected void connectLut(int index){
 		connection=new boolean[connection.length];
 		connection[index]=true;
 		selIn=index;

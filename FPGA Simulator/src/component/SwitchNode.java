@@ -1,3 +1,4 @@
+package component;
 
 public class SwitchNode extends Component {
 	private boolean interrupteur;
@@ -12,11 +13,11 @@ public class SwitchNode extends Component {
 		if (interrupteur) setOutput(inputs[0],1);
 		else setOutput(false,1);
 	}
-	public void interruption(boolean valeur){
+	protected void interruption(boolean valeur){
 		interrupteur=valeur;
 		updateOutputs();
 	}
-	public void interruption(){
+	protected void interruption(){
 		if (interrupteur) interrupteur=false;
 		else interrupteur=true;
 		updateOutputs();
