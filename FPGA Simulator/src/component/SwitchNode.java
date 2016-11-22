@@ -3,7 +3,7 @@ package component;
 public class SwitchNode extends Component {
 	private boolean interrupteur;
 	
-	SwitchNode(){
+	public SwitchNode(){
 		super(1,2);
 		updateOutputs();
 	}

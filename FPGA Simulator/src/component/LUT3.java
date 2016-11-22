@@ -5,7 +5,7 @@ public class LUT3 extends Component{
 	protected boolean[] tab= new boolean[8];
 	private int temporaire;
 	
-	LUT3() {
+	public LUT3() {
 		super(3, 1);
 		tab = new boolean[8];
 		updateOutputs();

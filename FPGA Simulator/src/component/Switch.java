@@ -4,7 +4,7 @@ package component;
 public class Switch extends Component {
 	private boolean etat;
 	
-	Switch() {
+	public Switch() {
 		super(1,1);
 		updateOutputs();
 	}
