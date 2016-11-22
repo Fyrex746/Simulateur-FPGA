@@ -13,9 +13,9 @@ public class LUT3 extends Component{
 	
 	protected void updateOutputs(){
 		temporaire=0;
-		if(inputs[0]) temporaire+=4; //MSB sur la case 0
+		if(inputs[0]) temporaire+=4;//MSB à gauche, en 0
 		if(inputs[1]) temporaire+=2;
-		if(inputs[2]) temporaire+=1;//LSB sur la case 2
+		if(inputs[2]) temporaire+=1;//LSB à droite, en 2
 		setOutput(tab[temporaire],0);
 	}
 	
