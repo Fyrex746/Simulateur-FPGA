@@ -33,8 +33,20 @@ public class WireTest {
 		
 		mux1.setInputs("000");
 		assertEquals(mux1.getOutput(0) , mux2.getInput(0) );
+	}
+	
+	@Test
+	public void disconnectWire() {
+		Wire wire = new Wire(mux1,0,mux2,0);
+		wire.disconect();
 		
+		mux1.setInputs("011");
+		mux2.setInputs("000");
 		
+		System.out.println(mux1);
+		System.out.println(mux2);
+		
+		assertNotEquals(mux1.getOutput(0) , mux2.getInput(0) );
 	}
 
 }
