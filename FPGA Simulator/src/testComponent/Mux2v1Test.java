@@ -8,7 +8,6 @@ import component.Mux2v1;
 public class Mux2v1Test {
 
 	Mux2v1 mux;
-	String inputsTest;
 	
 	@Before
 	public void setUp() throws Exception {
