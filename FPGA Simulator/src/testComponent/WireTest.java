@@ -22,13 +22,19 @@ public class WireTest {
 
 	@Test
 	public void connect2MuxWithWire() {
-		mux1.setInputs("000");
-		mux2.setInputs("000");
-		
 		Wire wire = new Wire(mux1,0,mux2,0);
+		assertNotNull("Création du fil à echoué",wire);
+		
+		mux1.setInputs("011");
+		assertEquals(mux1.getOutput(0) , mux2.getInput(0) );
+		
+		mux1.setInputs("010");
+		assertEquals(mux1.getOutput(0) , mux2.getInput(0) );
+		
+		mux1.setInputs("000");
+		assertEquals(mux1.getOutput(0) , mux2.getInput(0) );
 		
 		
-		fail("Not yet implemented");
 	}
 
 }
