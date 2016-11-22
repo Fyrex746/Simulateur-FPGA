@@ -14,7 +14,7 @@ public class LutIn extends Component{
 		setOutput(inputs[selIn],0);
 	}
 	
-	protected void connectLut(int index){
+	public void connectLut(int index){
 		connection=new boolean[connection.length];
 		connection[index]=true;
 		selIn=index;

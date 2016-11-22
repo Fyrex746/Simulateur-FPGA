@@ -2,7 +2,7 @@
 public class LUT3 extends Component{
 
 	protected boolean[] tab= new boolean[8];
-	private int temporaire;
+	protected int temporaire;
 	
 	LUT3() {
 		super(3, 1);
@@ -18,7 +18,7 @@ public class LUT3 extends Component{
 		setOutput(tab[temporaire],0);
 	}
 	
-	protected void setVal(boolean value, int index){
+	public void setVal(boolean value, int index){
 		//Change la valeur index du tableau
 		tab[index] = value;
 		updateOutputs();
