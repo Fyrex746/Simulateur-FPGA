@@ -10,7 +10,7 @@ public class Wire {
 	private int inputIndex;
 	
 	
-	Wire(Component componentA,int outputIndex,Component componentB,int inputIndex){
+	public Wire(Component componentA,int outputIndex,Component componentB,int inputIndex){
 		setcomponentA(componentA,outputIndex);
 		setcomponentB(componentB,inputIndex);
 		transfertSignal();
