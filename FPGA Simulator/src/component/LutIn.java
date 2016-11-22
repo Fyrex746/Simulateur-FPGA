@@ -5,7 +5,7 @@ public class LutIn extends Component{
 	protected boolean connection[];
 	protected int selIn;
 	
-	LutIn(int i) {
+	public LutIn(int i) {
 		super(i, 1);
 		connection=new boolean[i];
 		updateOutputs();
