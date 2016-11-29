@@ -30,7 +30,7 @@ abstract class Component {
 	public boolean getInput(int index){
 		return inputs[index];
 	}
-	public int numberOfOutputs(){
+	public int getNumberOfOutputs(){
 		return numberOfOutputs;
 	}
 	public void setInputs(String str){
@@ -79,7 +79,7 @@ abstract class Component {
 	public boolean getOutput(int index){
 		return outputs[index];
 	}
-	public int numberOfInputs(){
+	public int getNumberOfInputs(){
 		return numberOfInputs;
 	}
 	public String getOutputs(){
