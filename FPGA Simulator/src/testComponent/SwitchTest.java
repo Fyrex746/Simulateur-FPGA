@@ -25,7 +25,7 @@ public class SwitchTest {
 		sw.setInputs("0");
 		assertEquals("0", sw.getOutputs() );
 		
-		sw.switchEtat();
+		sw.switchState();
 		assertEquals("0", sw.getOutputs() );
 		sw.setInputs("1");
 		assertEquals("1", sw.getOutputs() );

@@ -42,9 +42,6 @@ public class WireTest {
 		mux1.setInputs("011");
 		mux2.setInputs("000");
 		
-		System.out.println(mux1);
-		System.out.println(mux2);
-		
 		assertNotEquals(mux1.getOutput(0) , mux2.getInput(0) );
 	}
 

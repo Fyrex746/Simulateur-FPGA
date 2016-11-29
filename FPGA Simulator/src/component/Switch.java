@@ -2,7 +2,7 @@ package component;
 
 
 public class Switch extends Component {
-	private boolean etat;
+	private boolean state;
 	
 	public Switch() {
 		super(1,1);
@@ -10,18 +10,20 @@ public class Switch extends Component {
 	}
 	
 	protected void updateOutputs(){
-		if (etat) setOutput(inputs[0],0);
+		if (state) setOutput(inputs[0],0);
 		else setOutput(false,0);
 	}
 	
-	public void switchEtat(){
-		if(etat) etat=false;
-		else etat=true;
-		updateOutputs();
+	public void switchState(){
+		if(state)setState(false);
+		else setState(true);
 	}
 	
-	public void setEtat(boolean val){
-		etat=val;
+	public void setState(boolean val){
+		state = val;
 		updateOutputs();
+	}
+	public boolean getState(boolean val){
+		return state;
 	}
 }
