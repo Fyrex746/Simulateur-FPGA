@@ -2,7 +2,7 @@ package component;
 
 
 public class Switch extends Component {
-	private boolean state;
+	private boolean state = false;
 	
 	public Switch() {
 		super(1,1);
