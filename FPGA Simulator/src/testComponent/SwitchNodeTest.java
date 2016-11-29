@@ -20,12 +20,14 @@ public class SwitchNodeTest {
 	@Test
 	public void test() {
 		swn.setInputs("1");
-		assertEquals("01", swn.getOutputs() );
+		assertEquals("10", swn.getOutputs() );
+		
 		swn.switchState();
 		assertEquals("11", swn.getOutputs() );
 		
 		swn.setInputs("0");
 		assertEquals("00", swn.getOutputs() );
+		
 		swn.switchState();
 		assertEquals("00", swn.getOutputs() );
 		

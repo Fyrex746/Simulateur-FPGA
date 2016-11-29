@@ -14,6 +14,8 @@ public class SwitchNode extends Component {
 	}
 	
 	protected void updateOutputs(){
+		wn.setInput(inputs[0], 0);
+		
 		setOutput(wn.getOutput(0),0);
 		setOutput(sw.getOutput(0),1);
 	}
