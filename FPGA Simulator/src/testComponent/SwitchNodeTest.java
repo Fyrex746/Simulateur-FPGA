@@ -14,15 +14,17 @@ public class SwitchNodeTest {
 
 	@Test
 	public void init() {
-		assertNotNull("L'initialisation à échoué",swn);
+		assertNotNull("Init fail",swn);
 	}
 	
 	@Test
 	public void test() {
 		swn.setInputs("1");
+		//System.out.println(swn.getState());
 		assertEquals("10", swn.getOutputs() );
 		
 		swn.switchState();
+		//System.out.println(swn.getState());
 		assertEquals("11", swn.getOutputs() );
 		
 		swn.setInputs("0");

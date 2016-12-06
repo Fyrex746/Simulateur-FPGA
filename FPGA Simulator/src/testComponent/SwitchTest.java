@@ -15,7 +15,7 @@ public class SwitchTest {
 
 	@Test
 	public void init() {
-		assertNotNull("L'initialisation à échoué",sw);
+		assertNotNull("Init fail",sw);
 	}
 	
 	@Test

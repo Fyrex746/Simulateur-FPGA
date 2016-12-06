@@ -14,7 +14,7 @@ public class LutInTest {
 
 	@Test
 	public void init() {
-		assertNotNull("L'initialisation à échoué",li);
+		assertNotNull("Init fail",li);
 	}
 	
 	@Test

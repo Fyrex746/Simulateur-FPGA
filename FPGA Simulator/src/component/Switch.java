@@ -23,7 +23,7 @@ public class Switch extends Component {
 		state = val;
 		updateOutputs();
 	}
-	public boolean getState(boolean val){
+	public boolean getState(){
 		return state;
 	}
 }

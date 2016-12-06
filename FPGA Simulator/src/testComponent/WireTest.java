@@ -22,7 +22,7 @@ public class WireTest {
 	@Test
 	public void connect2MuxWithWire() {
 		Wire wire = new Wire(mux1,0,mux2,0);
-		assertNotNull("Création du fil à echoué",wire);
+		assertNotNull("wire creating failed",wire);
 		
 		mux1.setInputs("011");
 		assertEquals(mux1.getOutput(0) , mux2.getInput(0) );

@@ -16,7 +16,7 @@ public class Mux2v1Test {
 
 	@Test
 	public void init() {
-		assertNotNull("L'initialisation à échoué",mux);
+		assertNotNull("Init fail",mux);
 	}
 	
 	@Test

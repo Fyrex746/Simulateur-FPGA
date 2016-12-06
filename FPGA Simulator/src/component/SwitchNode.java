@@ -22,12 +22,14 @@ public class SwitchNode extends Component {
 	
 	public void switchState(){
 		sw.switchState();
+		updateOutputs();
 	}
 	
 	public void setState(boolean val){
 		sw.setState(val);
+		updateOutputs();
 	}
-	public boolean getState(boolean val){
-		return sw.getState(val);
+	public boolean getState(){
+		return sw.getState();
 	}
 }
