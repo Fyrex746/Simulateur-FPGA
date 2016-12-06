@@ -2,11 +2,11 @@ package component;
 
 public class WireNode extends Component{
 	
-	WireNode(int numberOfOutputs) {
+	public WireNode(int numberOfOutputs) {
 		super(1, numberOfOutputs);
 	}
 	
-	WireNode(Component componentA,int outputIndex ) {
+	public WireNode(Component componentA,int outputIndex ) {
 		super(1, 0);
 		inputs[0] = componentA.getOutput(outputIndex);
 		inputsWires[0] = new Wire(componentA,outputIndex,this,0);
