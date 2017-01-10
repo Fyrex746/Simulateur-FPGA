@@ -67,6 +67,12 @@ import javax.swing.JTabbedPane;
 import java.awt.ComponentOrientation;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class TestWindow {
 
@@ -76,9 +82,11 @@ public class TestWindow {
 	 */
 	private final JLabel label = DefaultComponentFactory.getInstance().createTitle("Joli titre");
 	private JTextField txtL;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
-	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	private final ButtonGroup ExerciseMode = new ButtonGroup();
+	private final ButtonGroup Answers = new ButtonGroup();
+	private JTextField textField;
+	private JTextField txtTitreDeLexercice;
+	private String typeReponse;
 	/**
 	 * Launch the application.
 	 */
@@ -108,32 +116,21 @@ public class TestWindow {
 	private void initialize() {
 		frmTest = new JFrame();
 		frmTest.setTitle("Fenetre de test");
-		frmTest.setBounds(100, 100, 666, 459);
+		frmTest.setBounds(0, 0, 3840, 2160);
 		frmTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTest.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		frmTest.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel LeftPanel = new JPanel();
+		frmTest.getContentPane().add(LeftPanel, BorderLayout.WEST);
+		LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.PAGE_AXIS));
 		
 		JCheckBox chckbxAfficherSimulateur = new JCheckBox("Afficher simulateur");
 		chckbxAfficherSimulateur.setSelected(true);
-		panel.add(chckbxAfficherSimulateur);
+		LeftPanel.add(chckbxAfficherSimulateur);
 		
 		JTree tree = new JTree();
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent arg0) {
-				JOptionPane.showMessageDialog(null, arg0.getPath().getLastPathComponent());
-				/*if(arg0.equals("Jaune")) {
-					System.out.println("Couleur:" + cmd);
-					dess.setColor(Color.yellow);
-					}*/
-			}
-		});
-		tree.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		tree.setAutoscrolls(true);
-		tree.setShowsRootHandles(true);
-		tree.setBackground(Color.WHITE);
+		tree.setAlignmentY(Component.TOP_ALIGNMENT);
+		tree.setAlignmentX(Component.LEFT_ALIGNMENT);
 		tree.setModel(new DefaultTreeModel(
 			new DefaultMutableTreeNode("Table des mati\u00E8res") {
 				{
@@ -152,98 +149,178 @@ public class TestWindow {
 				}
 			}
 		));
-		tree.setEditable(true);
-		panel.add(tree);
-		panel.add(new JScrollPane(tree));
+		LeftPanel.add(tree);
+		//JScrollPane scrollPane = new JScrollPane(tree);
+		//leftPanel.add(scrollPane);
 		
 		/*ImageIcon imageIcon = new ImageIcon();
 		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
 		renderer.setLeafIcon(imageIcon);*/
 		
-		txtL = new JTextField();
-		txtL.setHorizontalAlignment(SwingConstants.CENTER);
-		txtL.setForeground(new Color(255, 255, 255));
-		txtL.setBackground(new Color(0, 51, 204));
-		txtL.setSelectedTextColor(Color.CYAN);
-		txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
-		frmTest.getContentPane().add(txtL, BorderLayout.CENTER);
-		txtL.setColumns(10);
+		JPanel CenterPanel = new JPanel();
+		frmTest.getContentPane().add(CenterPanel, BorderLayout.CENTER);
+		CenterPanel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		frmTest.getContentPane().add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel SouthPanel = new JPanel();
+		CenterPanel.add(SouthPanel, BorderLayout.SOUTH);
+		SouthPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel lblExercice = new JLabel("Exercice 1");
-		panel_1.add(lblExercice);
+		JPanel SimulatorAnswerPanel = new JPanel();
+		CenterPanel.add(SimulatorAnswerPanel, BorderLayout.CENTER);
+		SimulatorAnswerPanel.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblQuestion = new JLabel("Question 1");
-		panel_1.add(lblQuestion);
+		JPanel AnswerPanel = new JPanel();
+		SimulatorAnswerPanel.add(AnswerPanel, BorderLayout.SOUTH);
+		AnswerPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JLabel label_1 = new JLabel("----------- ?");
-		label_1.setBackground(new Color(0, 153, 204));
-		panel_1.add(label_1);
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout_3 = (FlowLayout) panel.getLayout();
+		flowLayout_3.setAlignment(FlowLayout.LEFT);
+		AnswerPanel.add(panel);
 		
-		JRadioButton rdbtnA = new JRadioButton("A");
-		buttonGroup_1.add(rdbtnA);
-		panel_1.add(rdbtnA);
-		
-		JRadioButton rdbtnB = new JRadioButton("B");
-		buttonGroup_1.add(rdbtnB);
-		panel_1.add(rdbtnB);
-		
-		JRadioButton rdbtnC = new JRadioButton("C");
-		buttonGroup_1.add(rdbtnC);
-		panel_1.add(rdbtnC);
-		
-		JPanel panel_2 = new JPanel();
-		frmTest.getContentPane().add(panel_2, BorderLayout.SOUTH);
-		
-		JLabel lblMinuteur = new JLabel("Minuteur:");
-		panel_2.add(lblMinuteur);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(0, 0, 23, 1));
-		panel_2.add(spinner);
-		
-		JLabel lblH = new JLabel("h");
-		panel_2.add(lblH);
-		
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(0, 0, 59, 1));
-		panel_2.add(spinner_1);
-		
-		JLabel lblMin = new JLabel("min");
-		panel_2.add(lblMin);
-		
-		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setModel(new SpinnerNumberModel(30, 0, 59, 1));
-		panel_2.add(spinner_2);
-		
-		JLabel lblS = new JLabel("s");
-		panel_2.add(lblS);
-		
-		JPanel panel_3 = new JPanel();
-		frmTest.getContentPane().add(panel_3, BorderLayout.NORTH);
+		JButton btnModifierLeSimulateur = new JButton("Modifier le simulateur");
+		btnModifierLeSimulateur.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Ouverture des param\u00E8tres du simulateur");
+			}
+		});
+		panel.add(btnModifierLeSimulateur);
 		
 		JButton btnRinitialiserSimulateur = new JButton("R\u00E9initialiser ce simulateur");
-		panel_3.add(btnRinitialiserSimulateur);
+		panel.add(btnRinitialiserSimulateur);
 		btnRinitialiserSimulateur.setMinimumSize(new Dimension(100, 23));
 		btnRinitialiserSimulateur.setMaximumSize(new Dimension(100, 23));
-		
-		JRadioButton rdbtnEtatInitial = new JRadioButton("Etat initial");
-		panel_3.add(rdbtnEtatInitial);
-		buttonGroup_2.add(rdbtnEtatInitial);
-		rdbtnEtatInitial.setSelected(true);
-		
-		JRadioButton rdbtnRsultatAttendu = new JRadioButton("R\u00E9sultat");
-		panel_3.add(rdbtnRsultatAttendu);
-		buttonGroup_2.add(rdbtnRsultatAttendu);
 		btnRinitialiserSimulateur.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "R\u00E9initialisation du simulateur");
 			}
 		});
+		
+		JPanel AnswerTypePanel = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) AnswerTypePanel.getLayout();
+		flowLayout_2.setAlignment(FlowLayout.LEFT);
+		AnswerPanel.add(AnswerTypePanel);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				typeReponse=arg0.getItem().toString();
+				JOptionPane.showMessageDialog(null, typeReponse);
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte", "R\u00E9ponse sur simulateur", "Checkbox"}));
+		comboBox.setToolTipText("");
+		AnswerTypePanel.add(comboBox);
+		
+		JButton btnParamtres = new JButton("Param\u00E8tres");
+		btnParamtres.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Param\u00E8tres de la zone");
+			}
+		});
+		AnswerTypePanel.add(btnParamtres);
+		
+		JPanel ReponseA = new JPanel();
+		FlowLayout fl_ReponseA = (FlowLayout) ReponseA.getLayout();
+		fl_ReponseA.setAlignment(FlowLayout.LEFT);
+		AnswerPanel.add(ReponseA);
+		
+		JRadioButton rdbtnA = new JRadioButton("A");
+		ReponseA.add(rdbtnA);
+		Answers.add(rdbtnA);
+		
+		JTextPane txtpnRponse = new JTextPane();
+		ReponseA.add(txtpnRponse);
+		txtpnRponse.setText("R\u00E9ponse 1");
+		
+		JPanel ReponseB = new JPanel();
+		FlowLayout fl_ReponseB = (FlowLayout) ReponseB.getLayout();
+		fl_ReponseB.setAlignment(FlowLayout.LEFT);
+		AnswerPanel.add(ReponseB);
+		
+		JRadioButton rdbtnB = new JRadioButton("B");
+		ReponseB.add(rdbtnB);
+		Answers.add(rdbtnB);
+		
+		JTextPane txtpnRponse_1 = new JTextPane();
+		ReponseB.add(txtpnRponse_1);
+		txtpnRponse_1.setText("R\u00E9ponse 2");
+		
+		JPanel ReponseC = new JPanel();
+		FlowLayout fl_ReponseC = (FlowLayout) ReponseC.getLayout();
+		fl_ReponseC.setAlignment(FlowLayout.LEFT);
+		AnswerPanel.add(ReponseC);
+		
+		JRadioButton rdbtnC = new JRadioButton("C");
+		ReponseC.add(rdbtnC);
+		Answers.add(rdbtnC);
+		
+		JTextPane txtpnRponse_2 = new JTextPane();
+		ReponseC.add(txtpnRponse_2);
+		txtpnRponse_2.setText("R\u00E9ponse 3");
+		
+		JTabbedPane SimulatorChoice = new JTabbedPane(JTabbedPane.TOP);
+		SimulatorAnswerPanel.add(SimulatorChoice, BorderLayout.CENTER);
+		
+		txtL = new JTextField();
+		SimulatorChoice.addTab("Etat initial", null, txtL, null);
+		txtL.setHorizontalAlignment(SwingConstants.CENTER);
+		txtL.setForeground(new Color(255, 255, 255));
+		txtL.setBackground(new Color(0, 51, 204));
+		txtL.setSelectedTextColor(Color.CYAN);
+		txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
+		txtL.setColumns(10);
+		
+		textField = new JTextField();
+		SimulatorChoice.addTab("R\u00E9sultat attendu", null, textField, null);
+		textField.setText("Simulateur \u00E0 ins\u00E9rer ici");
+		textField.setSelectedTextColor(Color.CYAN);
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setForeground(Color.BLACK);
+		textField.setColumns(10);
+		textField.setBackground(Color.GREEN);
+		
+		JPanel EnoncePanel = new JPanel();
+		CenterPanel.add(EnoncePanel, BorderLayout.NORTH);
+		EnoncePanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JPanel ExerciceNbTitlePanel = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) ExerciceNbTitlePanel.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEFT);
+		EnoncePanel.add(ExerciceNbTitlePanel);
+		
+		JLabel lblExercice = new JLabel("Exercice 1");
+		ExerciceNbTitlePanel.add(lblExercice);
+		lblExercice.setAutoscrolls(true);
+		lblExercice.setAlignmentY(Component.TOP_ALIGNMENT);
+		
+		JTextPane txtpnTitreDeLexercice = new JTextPane();
+		txtpnTitreDeLexercice.setText("Titre de l'exercice");
+		ExerciceNbTitlePanel.add(txtpnTitreDeLexercice);
+		
+		txtTitreDeLexercice = new JTextField();
+		txtTitreDeLexercice.setText("Titre de l'exercice");
+		ExerciceNbTitlePanel.add(txtTitreDeLexercice);
+		txtTitreDeLexercice.setColumns(10);
+		
+		JPanel QuestionNbTitlePanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) QuestionNbTitlePanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		EnoncePanel.add(QuestionNbTitlePanel);
+		
+		JLabel lblQuestion = new JLabel("Question 1");
+		QuestionNbTitlePanel.add(lblQuestion);
+		
+		JTextPane txtpnTitreDeLa = new JTextPane();
+		txtpnTitreDeLa.setText("Titre de la question(si n\u00E9cessaire, ne pas toucher sinon)");
+		QuestionNbTitlePanel.add(txtpnTitreDeLa);
+		
+		JTextPane Enoncé = new JTextPane();
+		Enoncé.setText("Entrer l'\u00E9nonc\u00E9 de la question");
+		EnoncePanel.add(Enoncé);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmTest.setJMenuBar(menuBar);
@@ -280,18 +357,30 @@ public class TestWindow {
 		
 		JCheckBoxMenuItem chckbxmntmEnregistrementAuto = new JCheckBoxMenuItem("Enregistrement auto");
 		mnFichier.add(chckbxmntmEnregistrementAuto);
-		chckbxmntmEnregistrementAuto.setSelected(true);//actif par defaut
+		chckbxmntmEnregistrementAuto.setSelected(true);
+		
+		JMenu mnModifier = new JMenu("Modifier");
+		menuBar.add(mnModifier);
+		
+		JMenuItem mntmModifierLeFormulaire = new JMenuItem("Modifier le formulaire de contact");
+		mnModifier.add(mntmModifierLeFormulaire);
+		mntmModifierLeFormulaire.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
+			}
+		});
 		
 		JMenu mnMode = new JMenu("Mode");
 		menuBar.add(mnMode);
 		
 		JRadioButtonMenuItem rdbtnmntmExamen = new JRadioButtonMenuItem("Examen");
-		buttonGroup.add(rdbtnmntmExamen);
+		ExerciseMode.add(rdbtnmntmExamen);
 		mnMode.add(rdbtnmntmExamen);
 		rdbtnmntmExamen.setSelected(true); //valeur par defaut du groupe de boutons
 		
 		JRadioButtonMenuItem rdbtnmntmExercice = new JRadioButtonMenuItem("Exercice");
-		buttonGroup.add(rdbtnmntmExercice);
+		ExerciseMode.add(rdbtnmntmExercice);
 		mnMode.add(rdbtnmntmExercice);
 		
 		JMenu mnAide = new JMenu("Aide");
@@ -306,23 +395,43 @@ public class TestWindow {
 		});
 		mnAide.add(mntmAPropos);
 		
-		JButton btnModifierLeFormulaire = new JButton("Modifier le formulaire de contact");
-		btnModifierLeFormulaire.addActionListener(new ActionListener() {
+		JMenuItem mntmGnrerLexercice = new JMenuItem("G\u00E9n\u00E9rer l'exercice");
+		menuBar.add(mntmGnrerLexercice);
+		mntmGnrerLexercice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
 			}
 		});
-		menuBar.add(btnModifierLeFormulaire);
 		
-		JButton btnNewButton = new JButton("G\u00E9n\u00E9rer l'exercice");
-		menuBar.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
-			}
-		});
+		JPanel TimerPanel = new JPanel();
+		FlowLayout fl_TimerPanel = (FlowLayout) TimerPanel.getLayout();
+		fl_TimerPanel.setAlignment(FlowLayout.RIGHT);
+		menuBar.add(TimerPanel);
+		
+		JLabel lblMinuteur = new JLabel("Minuteur:");
+		TimerPanel.add(lblMinuteur);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0, 0, 23, 1));
+		TimerPanel.add(spinner);
+		
+		JLabel lblH = new JLabel("h");
+		TimerPanel.add(lblH);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+		TimerPanel.add(spinner_1);
+		
+		JLabel lblMin = new JLabel("min");
+		TimerPanel.add(lblMin);
+		
+		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setModel(new SpinnerNumberModel(30, 0, 59, 1));
+		TimerPanel.add(spinner_2);
+		
+		JLabel lblS = new JLabel("s");
+		TimerPanel.add(lblS);
 	}
 
 	private class SwingAction extends AbstractAction {
