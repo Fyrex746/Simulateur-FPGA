@@ -64,6 +64,9 @@ import javax.swing.event.TreeSelectionEvent;
 import java.awt.Dimension;
 import javax.swing.SwingConstants;
 import javax.swing.JTabbedPane;
+import java.awt.ComponentOrientation;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class TestWindow {
 
@@ -75,6 +78,7 @@ public class TestWindow {
 	private JTextField txtL;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	/**
 	 * Launch the application.
 	 */
@@ -126,17 +130,6 @@ public class TestWindow {
 					}*/
 			}
 		});
-		
-		JButton btnRinitialiserSimulateur = new JButton("R\u00E9initialiser simulateur");
-		btnRinitialiserSimulateur.setMinimumSize(new Dimension(100, 23));
-		btnRinitialiserSimulateur.setMaximumSize(new Dimension(100, 23));
-		btnRinitialiserSimulateur.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "R\u00E9initialisation du simulateur");
-			}
-		});
-		panel.add(btnRinitialiserSimulateur);
 		tree.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		tree.setAutoscrolls(true);
 		tree.setShowsRootHandles(true);
@@ -167,19 +160,12 @@ public class TestWindow {
 		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
 		renderer.setLeafIcon(imageIcon);*/
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
-			}
-		});
-		frmTest.getContentPane().add(btnNewButton, BorderLayout.NORTH);
-		
 		txtL = new JTextField();
+		txtL.setHorizontalAlignment(SwingConstants.CENTER);
+		txtL.setForeground(new Color(255, 255, 255));
 		txtL.setBackground(new Color(0, 51, 204));
 		txtL.setSelectedTextColor(Color.CYAN);
-		txtL.setText("l");
+		txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
 		frmTest.getContentPane().add(txtL, BorderLayout.CENTER);
 		txtL.setColumns(10);
 		
@@ -194,6 +180,7 @@ public class TestWindow {
 		panel_1.add(lblQuestion);
 		
 		JLabel label_1 = new JLabel("----------- ?");
+		label_1.setBackground(new Color(0, 153, 204));
 		panel_1.add(label_1);
 		
 		JRadioButton rdbtnA = new JRadioButton("A");
@@ -207,6 +194,56 @@ public class TestWindow {
 		JRadioButton rdbtnC = new JRadioButton("C");
 		buttonGroup_1.add(rdbtnC);
 		panel_1.add(rdbtnC);
+		
+		JPanel panel_2 = new JPanel();
+		frmTest.getContentPane().add(panel_2, BorderLayout.SOUTH);
+		
+		JLabel lblMinuteur = new JLabel("Minuteur:");
+		panel_2.add(lblMinuteur);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0, 0, 23, 1));
+		panel_2.add(spinner);
+		
+		JLabel lblH = new JLabel("h");
+		panel_2.add(lblH);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+		panel_2.add(spinner_1);
+		
+		JLabel lblMin = new JLabel("min");
+		panel_2.add(lblMin);
+		
+		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setModel(new SpinnerNumberModel(30, 0, 59, 1));
+		panel_2.add(spinner_2);
+		
+		JLabel lblS = new JLabel("s");
+		panel_2.add(lblS);
+		
+		JPanel panel_3 = new JPanel();
+		frmTest.getContentPane().add(panel_3, BorderLayout.NORTH);
+		
+		JButton btnRinitialiserSimulateur = new JButton("R\u00E9initialiser ce simulateur");
+		panel_3.add(btnRinitialiserSimulateur);
+		btnRinitialiserSimulateur.setMinimumSize(new Dimension(100, 23));
+		btnRinitialiserSimulateur.setMaximumSize(new Dimension(100, 23));
+		
+		JRadioButton rdbtnEtatInitial = new JRadioButton("Etat initial");
+		panel_3.add(rdbtnEtatInitial);
+		buttonGroup_2.add(rdbtnEtatInitial);
+		rdbtnEtatInitial.setSelected(true);
+		
+		JRadioButton rdbtnRsultatAttendu = new JRadioButton("R\u00E9sultat");
+		panel_3.add(rdbtnRsultatAttendu);
+		buttonGroup_2.add(rdbtnRsultatAttendu);
+		btnRinitialiserSimulateur.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "R\u00E9initialisation du simulateur");
+			}
+		});
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmTest.setJMenuBar(menuBar);
@@ -268,6 +305,24 @@ public class TestWindow {
 			}
 		});
 		mnAide.add(mntmAPropos);
+		
+		JButton btnModifierLeFormulaire = new JButton("Modifier le formulaire de contact");
+		btnModifierLeFormulaire.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
+			}
+		});
+		menuBar.add(btnModifierLeFormulaire);
+		
+		JButton btnNewButton = new JButton("G\u00E9n\u00E9rer l'exercice");
+		menuBar.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Ca s'ouvre");
+			}
+		});
 	}
 
 	private class SwingAction extends AbstractAction {
