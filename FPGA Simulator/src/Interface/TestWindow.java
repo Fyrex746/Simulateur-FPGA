@@ -85,7 +85,6 @@ public class TestWindow {
 	private final ButtonGroup ExerciseMode = new ButtonGroup();
 	private final ButtonGroup Answers = new ButtonGroup();
 	private JTextField textField;
-	private JTextField txtTitreDeLexercice;
 	private String typeReponse;
 	/**
 	 * Launch the application.
@@ -300,11 +299,6 @@ public class TestWindow {
 		JTextPane txtpnTitreDeLexercice = new JTextPane();
 		txtpnTitreDeLexercice.setText("Titre de l'exercice");
 		ExerciceNbTitlePanel.add(txtpnTitreDeLexercice);
-		
-		txtTitreDeLexercice = new JTextField();
-		txtTitreDeLexercice.setText("Titre de l'exercice");
-		ExerciceNbTitlePanel.add(txtTitreDeLexercice);
-		txtTitreDeLexercice.setColumns(10);
 		
 		JPanel QuestionNbTitlePanel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) QuestionNbTitlePanel.getLayout();
