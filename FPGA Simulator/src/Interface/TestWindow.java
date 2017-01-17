@@ -114,7 +114,7 @@ public class TestWindow {
 		
 		JPanel panel = new JPanel();
 		frmTest.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JCheckBox chckbxAfficherSimulateur = new JCheckBox("Afficher simulateur");
 		chckbxAfficherSimulateur.setSelected(true);
