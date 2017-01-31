@@ -11,6 +11,7 @@ abstract class Component {
 	protected boolean outputs[];
 	Wire[] outputsWires;
 	
+	
 	//Inits
 	Component(int i,int o){
 		numberOfInputs = i;
