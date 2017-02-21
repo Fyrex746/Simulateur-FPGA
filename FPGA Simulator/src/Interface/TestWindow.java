@@ -164,6 +164,9 @@ public class TestWindow {
 			}
 		}));
 		LeftPanel.add(tree);
+		
+		DynamicTreeDemo dynamicTreeDemo = new DynamicTreeDemo();
+		LeftPanel.add(dynamicTreeDemo);
 
 		JPanel SimulatorSettingsPanel = new JPanel();
 		frmTest.getContentPane().add(SimulatorSettingsPanel, BorderLayout.CENTER);
