@@ -293,7 +293,16 @@ public class TestWindow {
 		btnRinitialiserSimulateur.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "R\u00E9initialisation du simulateur");
+				int result = JOptionPane.showConfirmDialog(null, "R\u00E9initialiser le simulateur?", "",JOptionPane.YES_NO_OPTION);
+				if (result == JOptionPane.YES_OPTION){
+					NbLut = 4;
+					NbBitLut = 3;
+					NbIn = 6;
+					AnswNbInputs.setText(String.valueOf(NbIn));
+					AnswNbLUT.setText(String.valueOf(NbLut));
+					AnswNbBitsLUT.setText(String.valueOf(NbBitLut));
+				}
+				//JOptionPane.showMessageDialog(null, "R\u00E9initialisation du simulateur");
 			}
 		});
 
