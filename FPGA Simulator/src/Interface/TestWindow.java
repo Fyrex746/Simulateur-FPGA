@@ -138,9 +138,11 @@ public class TestWindow {
 		LeftPanel.add(chckbxAfficherSimulateur);
 
 		JTree tree = new JTree();
+		tree.setEditable(true);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
 			public void valueChanged(TreeSelectionEvent arg0) {
-				JOptionPane.showMessageDialog(null, tree.getLastSelectedPathComponent());
+				JOptionPane.showMessageDialog(null, tree.getLastSelectedPathComponent());//affiche le nom du dernier élément sélectionné
+				//JOptionPane.showMessageDialog(null, tree.getSelectionPath().getPathCount());//affiche la profondeur du noeud choisi 
 			}
 		});
 		tree.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -453,7 +455,7 @@ public class TestWindow {
 		});
 		mnFichier.add(mntmNouveau);
 
-		JMenuItem mntmOuvrir = new JMenuItem("Ouvrir");
+		JMenuItem mntmOuvrir = new JMenuItem("Ouvrir...");
 		mntmOuvrir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
