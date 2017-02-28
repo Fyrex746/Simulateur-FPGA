@@ -70,13 +70,15 @@ public class DynamicTreeDemo extends JPanel
         removeButton.addActionListener(this);
 
         //Lay everything out.
-        treePanel.setPreferredSize(new Dimension(300, 150));
+        treePanel.setPreferredSize(new Dimension(220, 200));
         add(treePanel, BorderLayout.CENTER);
 
         JPanel panel = new JPanel(new GridLayout(0,2));
         panel.add(addButton);
         panel.add(removeButton);
         add(panel, BorderLayout.SOUTH);
+        treePanel.tree.expandRow(0);
+        treePanel.tree.expandRow(1);
     }
 
     public void populateTree(DynamicTree treePanel) {

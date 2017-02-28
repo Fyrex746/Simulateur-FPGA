@@ -131,11 +131,11 @@ public class TestWindow {
 
 		JPanel LeftPanel = new JPanel();
 		frmTest.getContentPane().add(LeftPanel, BorderLayout.WEST);
-		LeftPanel.setLayout(new BoxLayout(LeftPanel, BoxLayout.PAGE_AXIS));
+		LeftPanel.setLayout(new BorderLayout(0, 0));
 
 		JCheckBox chckbxAfficherSimulateur = new JCheckBox("Afficher simulateur");
 		chckbxAfficherSimulateur.setSelected(true);
-		LeftPanel.add(chckbxAfficherSimulateur);
+		LeftPanel.add(chckbxAfficherSimulateur, BorderLayout.NORTH);
 		/*//Arbre non dynamique
 		JTree tree = new JTree();
 		tree.setEditable(true);
@@ -166,7 +166,7 @@ public class TestWindow {
 		LeftPanel.add(tree);
 		//*/
 		DynamicTreeDemo dynamicTreeDemo = new DynamicTreeDemo();
-		LeftPanel.add(dynamicTreeDemo);
+		LeftPanel.add(dynamicTreeDemo, BorderLayout.CENTER);
 
 		JPanel SimulatorSettingsPanel = new JPanel();
 		frmTest.getContentPane().add(SimulatorSettingsPanel, BorderLayout.CENTER);
