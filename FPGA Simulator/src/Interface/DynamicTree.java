@@ -57,10 +57,9 @@ public class DynamicTree extends JPanel {
 
     public DynamicTree() {
         super(new GridLayout(1,0));
-        
-        rootNode = new DefaultMutableTreeNode("Root Node");
+        rootNode = new DefaultMutableTreeNode("Table des mati\u00E8res");
         treeModel = new DefaultTreeModel(rootNode);
-	treeModel.addTreeModelListener(new MyTreeModelListener());
+        treeModel.addTreeModelListener(new MyTreeModelListener());
         tree = new JTree(treeModel);
         tree.setEditable(true);
         tree.getSelectionModel().setSelectionMode
@@ -83,7 +82,7 @@ public class DynamicTree extends JPanel {
         if (currentSelection != null) {
             DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
                          (currentSelection.getLastPathComponent());
-            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
+           MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
             if (parent != null) {
                 treeModel.removeNodeFromParent(currentNode);
                 return;
@@ -105,13 +104,12 @@ public class DynamicTree extends JPanel {
             parentNode = (DefaultMutableTreeNode)
                          (parentPath.getLastPathComponent());
         }
-
-        return addObject(parentNode, child, true);
+       return addObject(parentNode, child, true);
     }
 
     public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,
                                             Object child) {
-        return addObject(parent, child, false);
+    	return addObject(parent, child, false);
     }
 
     public DefaultMutableTreeNode addObject(DefaultMutableTreeNode parent,

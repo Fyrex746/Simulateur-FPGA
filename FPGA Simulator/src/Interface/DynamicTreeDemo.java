@@ -49,12 +49,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class DynamicTreeDemo extends JPanel 
                              implements ActionListener {
-    private int newExSuffix = 3;
-    private int newQuSuffix = 1;
-    private int newSsQuSuffix = 1;
     private static String ADD_COMMAND = "add";
     private static String REMOVE_COMMAND = "remove";
-    private static String CLEAR_COMMAND = "clear";
     
     private DynamicTree treePanel;
 
@@ -86,14 +82,12 @@ public class DynamicTreeDemo extends JPanel
     public void populateTree(DynamicTree treePanel) {
         String p1Name = new String("Exercice 1");
         String c1Name = new String("Question 1");
-        String c2Name = new String("Question 2");
 
-        DefaultMutableTreeNode p1, p2;
+        DefaultMutableTreeNode p1;
 
         p1 = treePanel.addObject(null, p1Name);
         
         treePanel.addObject(p1, c1Name);
-        treePanel.addObject(p1, c2Name);
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -105,12 +99,13 @@ public class DynamicTreeDemo extends JPanel
         		JOptionPane.showMessageDialog(null, "Veuillez sélectionner un noeud!");
         	}
         	else{
+        	int NbEnfants=treePanel.treeModel.getChildCount(treePanel.tree.getLastSelectedPathComponent())+1;
         	if(treePanel.tree.getSelectionPath().getPathCount()==1){
-        		treePanel.addObject("Exercice " + newExSuffix++);}
+        		treePanel.addObject("Exercice " + NbEnfants);}
         	else if (treePanel.tree.getSelectionPath().getPathCount()==2){
-        		treePanel.addObject("Question " + newQuSuffix++);}
+        		treePanel.addObject("Question " + NbEnfants);}
         	else if (treePanel.tree.getSelectionPath().getPathCount()==3){
-        		treePanel.addObject("Sous-question " + newSsQuSuffix++);}}
+        		treePanel.addObject("Sous-question " + NbEnfants);}}
         } else if (REMOVE_COMMAND.equals(command)) {
             //Remove button clicked
             treePanel.removeCurrentNode();
