@@ -136,7 +136,7 @@ public class TestWindow {
 		JCheckBox chckbxAfficherSimulateur = new JCheckBox("Afficher simulateur");
 		chckbxAfficherSimulateur.setSelected(true);
 		LeftPanel.add(chckbxAfficherSimulateur);
-
+		/*//Arbre non dynamique
 		JTree tree = new JTree();
 		tree.setEditable(true);
 		tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -164,7 +164,7 @@ public class TestWindow {
 			}
 		}));
 		LeftPanel.add(tree);
-		
+		//*/
 		DynamicTreeDemo dynamicTreeDemo = new DynamicTreeDemo();
 		LeftPanel.add(dynamicTreeDemo);
 
@@ -322,7 +322,7 @@ public class TestWindow {
 			}
 		});
 		comboBox.setModel(
-				new DefaultComboBoxModel(new String[] { "QCM", "Zone de texte", "R\u00E9ponse sur simulateur" }));
+		new DefaultComboBoxModel(new String[] { "QCM", "Zone de texte", "R\u00E9ponse sur simulateur" }));
 		comboBox.setToolTipText("");
 		AnswerTypePanel.add(comboBox);
 
