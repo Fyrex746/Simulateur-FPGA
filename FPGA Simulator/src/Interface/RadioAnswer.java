@@ -11,15 +11,17 @@ public class RadioAnswer extends JPanel {
 	/**
 	 * Create the panel.
 	 */
+	JRadioButton rdbtn;
+	JTextPane txtpnRponse;
 	public RadioAnswer(String s) {
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		JRadioButton rdbtnA = new JRadioButton(s);
-		add(rdbtnA);
+		rdbtn = new JRadioButton(s);
+		add(rdbtn);
 		
-		JTextPane txtpnRponseA = new JTextPane();
-		txtpnRponseA.setText("R\u00E9ponse "+s);
-		add(txtpnRponseA);
+		JTextPane txtpnRponse = new JTextPane();
+		txtpnRponse.setText("R\u00E9ponse "+s);
+		add(txtpnRponse);
 
 	}
 
