@@ -125,7 +125,7 @@ public class TestDynamicForm extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        RadioDynamicForm newContentPane = new RadioDynamicForm(5);
+        RadioDynamicForm newContentPane = new RadioDynamicForm(15);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 

@@ -356,45 +356,9 @@ public class TestWindow {
 			}
 		});
 		AnswerTypePanel.add(btnParamtres);
-
-		JPanel ReponseA = new JPanel();
-		FlowLayout fl_ReponseA = (FlowLayout) ReponseA.getLayout();
-		fl_ReponseA.setAlignment(FlowLayout.LEFT);
-		AnswerPanel.add(ReponseA);
-
-		JRadioButton rdbtnA = new JRadioButton("A");
-		ReponseA.add(rdbtnA);
-		Answers.add(rdbtnA);
-
-		JTextPane txtpnRponse = new JTextPane();
-		ReponseA.add(txtpnRponse);
-		txtpnRponse.setText("R\u00E9ponse 1");
-
-		JPanel ReponseB = new JPanel();
-		FlowLayout fl_ReponseB = (FlowLayout) ReponseB.getLayout();
-		fl_ReponseB.setAlignment(FlowLayout.LEFT);
-		AnswerPanel.add(ReponseB);
-
-		JRadioButton rdbtnB = new JRadioButton("B");
-		ReponseB.add(rdbtnB);
-		Answers.add(rdbtnB);
-
-		JTextPane txtpnRponse_1 = new JTextPane();
-		ReponseB.add(txtpnRponse_1);
-		txtpnRponse_1.setText("R\u00E9ponse 2");
-
-		JPanel ReponseC = new JPanel();
-		FlowLayout fl_ReponseC = (FlowLayout) ReponseC.getLayout();
-		fl_ReponseC.setAlignment(FlowLayout.LEFT);
-		AnswerPanel.add(ReponseC);
-
-		JRadioButton rdbtnC = new JRadioButton("C");
-		ReponseC.add(rdbtnC);
-		Answers.add(rdbtnC);
-
-		JTextPane txtpnRponse_2 = new JTextPane();
-		ReponseC.add(txtpnRponse_2);
-		txtpnRponse_2.setText("R\u00E9ponse 3");
+		
+		RadioDynamicForm radioDynamicForm = new RadioDynamicForm(NbPossibleAns);
+		AnswerPanel.add(radioDynamicForm);
 
 		JTabbedPane SimulatorChoice = new JTabbedPane(JTabbedPane.TOP);
 
