@@ -87,7 +87,9 @@ public class DynamicTree extends JPanel {
             DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection.getLastPathComponent());
            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
             if (parent != null) {
+                tree.setSelectionPath(tree.getSelectionPath().getParentPath());
                 treeModel.removeNodeFromParent(currentNode);
+
                 //return;
             }
         }
@@ -166,7 +168,7 @@ public class DynamicTree extends JPanel {
     	    JTree tree = (JTree) se.getSource();
     	    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
     	    if (selectedNode.isLeaf() && tree.getSelectionPath().getPathCount()>=3) {
-    	    	JOptionPane.showMessageDialog(null, selectedNode.toString());
+    	    	//JOptionPane.showMessageDialog(null, selectedNode.toString());
     	    }
     	  }
     	}

@@ -108,11 +108,19 @@ public class DynamicTreeDemo extends JPanel
         		else if (treePanel.tree.getSelectionPath().getPathCount()==3){
         			treePanel.addObject("Sous-question " + NbEnfants);
         		}
+        		else{
+        			JOptionPane.showMessageDialog(null, "Inutile d'aller si loin!");
+        		}
         	}
         }
         else if (REMOVE_COMMAND.equals(command)) {
             //Remove button clicked
-            treePanel.removeCurrentNode();
+            if(treePanel.tree.getSelectionPath().getPathCount()==1){
+    			JOptionPane.showMessageDialog(null, "Elément impossible à retirer");
+            }
+            else{
+            	treePanel.removeCurrentNode();
+            }
         }
     }
 
