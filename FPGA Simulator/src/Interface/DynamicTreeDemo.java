@@ -94,21 +94,23 @@ public class DynamicTreeDemo extends JPanel
     
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        
         if (ADD_COMMAND.equals(command)) {
             //Add button clicked
         	if(treePanel.tree.getSelectionPath()==null){
         		JOptionPane.showMessageDialog(null, "Veuillez sélectionner un noeud!");
         	}
         	else{
-        	int NbEnfants=treePanel.treeModel.getChildCount(treePanel.tree.getLastSelectedPathComponent())+1;
-        	if(treePanel.tree.getSelectionPath().getPathCount()==1){
-        		treePanel.addObject("Exercice " + NbEnfants);}
-        	else if (treePanel.tree.getSelectionPath().getPathCount()==2){
-        		treePanel.addObject("Question " + NbEnfants);}
-        	else if (treePanel.tree.getSelectionPath().getPathCount()==3){
-        		treePanel.addObject("Sous-question " + NbEnfants);}}
-        } else if (REMOVE_COMMAND.equals(command)) {
+        		int NbEnfants=treePanel.treeModel.getChildCount(treePanel.tree.getLastSelectedPathComponent())+1;
+        		if(treePanel.tree.getSelectionPath().getPathCount()==1){
+        			treePanel.addObject("Exercice " + NbEnfants);}
+        		else if (treePanel.tree.getSelectionPath().getPathCount()==2){
+        			treePanel.addObject("Question " + NbEnfants);}
+        		else if (treePanel.tree.getSelectionPath().getPathCount()==3){
+        			treePanel.addObject("Sous-question " + NbEnfants);
+        		}
+        	}
+        }
+        else if (REMOVE_COMMAND.equals(command)) {
             //Remove button clicked
             treePanel.removeCurrentNode();
         }

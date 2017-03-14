@@ -38,6 +38,8 @@ package Interface;
 
 import java.awt.GridLayout;
 import java.awt.Toolkit;
+
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
@@ -48,6 +50,8 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 
 public class DynamicTree extends JPanel {
     protected DefaultMutableTreeNode rootNode;
@@ -65,7 +69,7 @@ public class DynamicTree extends JPanel {
         tree.getSelectionModel().setSelectionMode
                 (TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setShowsRootHandles(true);
-
+        tree.addTreeSelectionListener(new SelectionListener());
         JScrollPane scrollPane = new JScrollPane(tree);
         add(scrollPane);
     }
@@ -80,15 +84,13 @@ public class DynamicTree extends JPanel {
     public void removeCurrentNode() {
         TreePath currentSelection = tree.getSelectionPath();
         if (currentSelection != null) {
-            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode)
-                         (currentSelection.getLastPathComponent());
+            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) (currentSelection.getLastPathComponent());
            MutableTreeNode parent = (MutableTreeNode)(currentNode.getParent());
             if (parent != null) {
                 treeModel.removeNodeFromParent(currentNode);
-                return;
+                //return;
             }
-        } 
-
+        }
         // Either there was no selection, or the root was selected.
         toolkit.beep();
     }
@@ -158,4 +160,14 @@ public class DynamicTree extends JPanel {
         public void treeStructureChanged(TreeModelEvent e) {
         }
     }
+    class SelectionListener implements TreeSelectionListener {
+
+    	  public void valueChanged(TreeSelectionEvent se) {
+    	    JTree tree = (JTree) se.getSource();
+    	    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+    	    if (selectedNode.isLeaf() && tree.getSelectionPath().getPathCount()>=3) {
+    	    	JOptionPane.showMessageDialog(null, selectedNode.toString());
+    	    }
+    	  }
+    	}
 }

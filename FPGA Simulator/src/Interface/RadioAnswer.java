@@ -11,8 +11,8 @@ public class RadioAnswer extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	JRadioButton rdbtn;
-	JTextPane txtpnRponse;
+	protected JRadioButton rdbtn;
+	private JTextPane txtpnRponse;
 	public RadioAnswer(String s) {
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		

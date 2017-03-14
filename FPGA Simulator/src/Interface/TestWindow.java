@@ -136,35 +136,7 @@ public class TestWindow {
 		JCheckBox chckbxAfficherSimulateur = new JCheckBox("Afficher simulateur");
 		chckbxAfficherSimulateur.setSelected(true);
 		LeftPanel.add(chckbxAfficherSimulateur, BorderLayout.NORTH);
-		/*//Arbre non dynamique
-		JTree tree = new JTree();
-		tree.setEditable(true);
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			public void valueChanged(TreeSelectionEvent arg0) {
-				JOptionPane.showMessageDialog(null, tree.getLastSelectedPathComponent());//affiche le nom du dernier élément sélectionné
-				//JOptionPane.showMessageDialog(null, tree.getSelectionPath().getPathCount());//affiche la profondeur du noeud choisi 
-			}
-		});
-		tree.setAlignmentY(Component.TOP_ALIGNMENT);
-		tree.setAlignmentX(Component.LEFT_ALIGNMENT);
-		tree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Table des mati\u00E8res") {
-			{
-				DefaultMutableTreeNode node_1;
-				node_1 = new DefaultMutableTreeNode("Exercice 1");
-				node_1.add(new DefaultMutableTreeNode("Question 1"));
-				node_1.add(new DefaultMutableTreeNode("Question 2"));
-				node_1.add(new DefaultMutableTreeNode("+Ajouter une question"));
-				add(node_1);
-				node_1 = new DefaultMutableTreeNode("Exercice 2");
-				node_1.add(new DefaultMutableTreeNode("Question 1"));
-				node_1.add(new DefaultMutableTreeNode("Question 2"));
-				node_1.add(new DefaultMutableTreeNode("+Ajouter une question"));
-				add(node_1);
-				add(new DefaultMutableTreeNode("+Ajouter un exercice"));
-			}
-		}));
-		LeftPanel.add(tree);
-		//*/
+		
 		DynamicTreeDemo dynamicTreeDemo = new DynamicTreeDemo();
 		LeftPanel.add(dynamicTreeDemo, BorderLayout.CENTER);
 
@@ -356,10 +328,15 @@ public class TestWindow {
 			}
 		});
 		AnswerTypePanel.add(btnParamtres);
+		if(PossibleMultipleAnsw){
+			RadioDynamicForm radioDynamicForm = new RadioDynamicForm(NbPossibleAns);
+			AnswerPanel.add(radioDynamicForm);
+		}
+		else{
+			CheckDynamicForm checkDynamicForm = new CheckDynamicForm(NbPossibleAns);
+			AnswerPanel.add(checkDynamicForm);
+		}
 		
-		RadioDynamicForm radioDynamicForm = new RadioDynamicForm(NbPossibleAns);
-		AnswerPanel.add(radioDynamicForm);
-
 		JTabbedPane SimulatorChoice = new JTabbedPane(JTabbedPane.TOP);
 
 		SimulatorAnswerPanel.add(SimulatorChoice, BorderLayout.CENTER);
