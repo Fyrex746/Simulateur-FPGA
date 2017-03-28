@@ -8,11 +8,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,8 +36,14 @@ public class AnswerPanel extends JPanel {
 	private JComboBox AnswerType;
 	private JCheckBox chckbxRponsesMultiples;
 	private JPanel currentPanel;
+	private JScrollPane jsp;
 	public AnswerPanel(int NbAnsInitial) {
-		NbPossibleAns=NbAnsInitial;
+		if(NbAnsInitial>26 || NbAnsInitial<1){
+			NbPossibleAns=3;
+		}
+		else{
+			NbPossibleAns=NbAnsInitial;
+		}
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel AnswerSettingsPanel = new JPanel();
@@ -42,7 +52,7 @@ public class AnswerPanel extends JPanel {
 		AnswerSettingsPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		chckbxRponsesMultiples = new JCheckBox("R\u00E9ponses multiples");
-		chckbxRponsesMultiples.setSelected(true);
+		chckbxRponsesMultiples.setSelected(true); //valeur par défaut
 		AnswerSettingsPanel.add(chckbxRponsesMultiples);
 		
 		JPanel NbAnsPanel = new JPanel();
@@ -86,11 +96,11 @@ public class AnswerPanel extends JPanel {
 					int result = JOptionPane.showConfirmDialog(null, AnswerSettingsPanel, "", JOptionPane.OK_CANCEL_OPTION);
 					if (result == JOptionPane.OK_OPTION) {
 						PossibleMultipleAnsw = chckbxRponsesMultiples.isSelected();
-						if(isInteger(NbQCMAns.getText()) && Integer.parseInt(NbQCMAns.getText())>0){
+						if(isInteger(NbQCMAns.getText()) && Integer.parseInt(NbQCMAns.getText())>1 && Integer.parseInt(NbQCMAns.getText())<27){
 							NbPossibleAns = Integer.parseInt(NbQCMAns.getText());
 						}
 						else{
-							JOptionPane.showMessageDialog(null, "Veuillez entrer un entier positif strictement!");
+							JOptionPane.showMessageDialog(null, "Veuillez entrer un entier entre 2 et 26");
 							NbQCMAns.setText(String.valueOf(NbPossibleAns));
 						}
 					} else {
@@ -110,11 +120,13 @@ public class AnswerPanel extends JPanel {
 		});
 		AnswerTypeSettingsPanel.add(AnswerSettings);
 		currentPanel=new JPanel();
-		add(currentPanel, BorderLayout.CENTER);
+		jsp = new JScrollPane (currentPanel);
+		add(jsp, BorderLayout.CENTER);
 		updateCentralPanel();
 	}
 	public void updateCentralPanel(){
 		remove(currentPanel);
+		remove(jsp);
 		if (AnswerType.getSelectedItem() == "QCM"){
 			if(chckbxRponsesMultiples.isSelected()){
 				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns);
@@ -128,20 +140,22 @@ public class AnswerPanel extends JPanel {
 			}
 		}
 		else if(AnswerType.getSelectedItem() == "Zone de texte"){
-			JTextField textField = new JTextField();
-			textField.setText("Entrer la réponse");
-			textField.setSelectedTextColor(Color.CYAN);
-			textField.setHorizontalAlignment(SwingConstants.CENTER);
-			textField.setForeground(Color.BLACK);
-			textField.setColumns(10);
-			textField.setBackground(Color.GREEN);
+			JTextArea txtrTextarea = new JTextArea();
+			txtrTextarea.setText("Entrer la réponse");
+			txtrTextarea.setBackground(Color.LIGHT_GRAY);
 			currentPanel=new JPanel();
 			currentPanel.setLayout(new BorderLayout());
-	        currentPanel.add(BorderLayout.CENTER, textField);
+	        currentPanel.add(BorderLayout.CENTER, txtrTextarea);
 			add(currentPanel, BorderLayout.CENTER);
-		}
+		};
 		currentPanel.setVisible(false);
 		currentPanel.setVisible(true);
+		jsp = new JScrollPane (currentPanel);
+		jsp.setPreferredSize(new Dimension(10,105));
+		if(AnswerType.getSelectedItem() == "R\u00E9ponse sur le simulateur") jsp.setPreferredSize(new Dimension(0,0));
+	    jsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+	    add(jsp, BorderLayout.CENTER);
 	}
 	public static boolean isInteger(final String strInput) {
 	    boolean ret = true;
