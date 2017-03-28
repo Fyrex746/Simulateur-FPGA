@@ -8,6 +8,7 @@ public interface Simulator {
 	
 	//Appeler cette fonction dans l'interface graphique pour configurer les paramètres du simulateur et gérer les erreurs
 	public void setParameters(Map<String, String> parameters) throws SimulatorParametersException;
+	public void reset();
 }
 
 class SimulatorParametersException  extends Exception{
