@@ -10,6 +10,9 @@ public class CheckDynamicForm extends JPanel {
 	 * Create the panel.
 	 */
 	private int NbAnsw=3;
+	public CheckDynamicForm() {
+		this(3);
+	}
 	public CheckDynamicForm(int NbAnsw) {
 		setLayout(new GridLayout(NbAnsw, 1, 0, 0));
 		for(int i=0;i<NbAnsw;i++){

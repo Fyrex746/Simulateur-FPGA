@@ -37,8 +37,12 @@ public class AnswerPanel extends JPanel {
 	private JCheckBox chckbxRponsesMultiples;
 	private JPanel currentPanel;
 	private JScrollPane jsp;
+	
+	public AnswerPanel(){
+		this(3);
+	}
 	public AnswerPanel(int NbAnsInitial) {
-		if(NbAnsInitial>26 || NbAnsInitial<1){
+		if(NbAnsInitial>26 || NbAnsInitial<2){
 			NbPossibleAns=3;
 		}
 		else{
@@ -124,7 +128,7 @@ public class AnswerPanel extends JPanel {
 		add(jsp, BorderLayout.CENTER);
 		updateCentralPanel();
 	}
-	public void updateCentralPanel(){
+	private void updateCentralPanel(){
 		remove(currentPanel);
 		remove(jsp);
 		if (AnswerType.getSelectedItem() == "QCM"){
@@ -148,6 +152,7 @@ public class AnswerPanel extends JPanel {
 	        currentPanel.add(BorderLayout.CENTER, txtrTextarea);
 			add(currentPanel, BorderLayout.CENTER);
 		};
+		revalidate();
 		currentPanel.setVisible(false);
 		currentPanel.setVisible(true);
 		jsp = new JScrollPane (currentPanel);
