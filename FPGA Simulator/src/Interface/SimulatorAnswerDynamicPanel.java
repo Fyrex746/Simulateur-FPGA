@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 public class SimulatorAnswerDynamicPanel extends JPanel {
 	private SimulatorPanel simulatorPanel;
@@ -12,16 +14,16 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public SimulatorAnswerDynamicPanel() {
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent e) {
-				update(); //fonctionne si on resize manuellement la fenetre
-			}
-		});
 		setLayout(new BorderLayout(0, 0));
 		
 		answerPanel = new AnswerPanel();
 		simulatorPanel = new SimulatorPanel();
+		simulatorPanel.addContainerListener(new ContainerAdapter() {
+			@Override
+			public void componentAdded(ContainerEvent arg0) {
+				update();
+			}
+		});
 		add(simulatorPanel, BorderLayout.CENTER);
 		update();
 	}
@@ -35,6 +37,6 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 			add(answerPanel, BorderLayout.CENTER);
 			add(simulatorPanel, BorderLayout.NORTH);
 		}
-		System.out.println("Panel regroupé: "+simulatorPanel.isActive);
+		//System.out.println("Panel regroupé: "+simulatorPanel.isActive);
 	}
 }
