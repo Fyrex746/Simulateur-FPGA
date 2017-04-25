@@ -57,7 +57,8 @@ public class DynamicTree extends JPanel {
     protected DefaultMutableTreeNode rootNode;
     protected DefaultTreeModel treeModel;
     protected JTree tree;
-    private Toolkit toolkit = Toolkit.getDefaultToolkit();
+    int ExSel, QuSel, SsQuSel;
+	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     public DynamicTree() {
         super(new GridLayout(1,0));
@@ -168,6 +169,22 @@ public class DynamicTree extends JPanel {
     	    JTree tree = (JTree) se.getSource();
     	    DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
     	    if (selectedNode.isLeaf() && tree.getSelectionPath().getPathCount()>=3) {
+    	    	if(tree.getSelectionPath().getPathCount()==3){
+    	    		ExSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Exercice ", ""));
+    	    		QuSel=Integer.parseInt(selectedNode.toString().replaceAll("Question ", ""));
+    	    		SsQuSel=0;
+    	    	}
+    	    	else if(tree.getSelectionPath().getPathCount()==4){
+    	    		ExSel=Integer.parseInt(selectedNode.getParent().getParent().toString().replaceAll("Exercice ", ""));
+    	    		QuSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Question ", ""));
+    	    		SsQuSel=Integer.parseInt(selectedNode.toString().replaceAll("Sous-question ", ""));
+    	    	}
+    	    	/*if(SsQuSel==0){
+    	    		JOptionPane.showMessageDialog(null, "Exercice -"+ExSel+"-\n\t Question "+QuSel);
+    	    	}
+    	    	else{
+    	    		JOptionPane.showMessageDialog(null, "Exercice -"+ExSel+"-\n\t Question "+QuSel+"."+SsQuSel);
+    	    	}*/
     	    	//JOptionPane.showMessageDialog(null, selectedNode.toString());
     	    }
     	  }

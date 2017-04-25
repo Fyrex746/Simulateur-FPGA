@@ -14,12 +14,12 @@ public class QuestionTotalPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public QuestionTotalPanel() {
-		this(1,1);
+		this(1,1,0);
 	}
-	public QuestionTotalPanel(int nbEx, int nbQu) {
+	public QuestionTotalPanel(int nbEx, int nbQu, int nbSsQu) {
 		setLayout(new BorderLayout(0, 0));
 		
-		EnoncePanel enoncePanel = new EnoncePanel(nbEx,nbQu);
+		EnoncePanel enoncePanel = new EnoncePanel(nbEx,nbQu, nbSsQu);
 		add(enoncePanel, BorderLayout.NORTH);
 		
 		SimulatorAnswerDynamicPanel simulatorAnswerDynamicPanel = new SimulatorAnswerDynamicPanel();

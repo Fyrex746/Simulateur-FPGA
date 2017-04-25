@@ -21,9 +21,9 @@ public class EnoncePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public EnoncePanel() {
-		this(1,1);
+		this(1,1,0);
 	}
-	public EnoncePanel(int nbEx, int nbQu) {
+	public EnoncePanel(int nbEx, int nbQu, int nbSsQu) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel NumerotationPanel = new JPanel();
@@ -48,7 +48,13 @@ public class EnoncePanel extends JPanel {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		NumerotationPanel.add(QuNbPanel, BorderLayout.SOUTH);
 		
-		JLabel lblQuestion = new JLabel("Question "+nbQu);
+		JLabel lblQuestion;
+		if(nbSsQu<1){
+			lblQuestion = new JLabel("Question "+nbQu);
+		}
+		else{
+			lblQuestion = new JLabel("Question "+nbQu+"."+nbSsQu);
+		}
 		QuNbPanel.add(lblQuestion);
 		
 		//JTextArea txtrTitreDeLa = new JTextArea(); //retour a la ligne possible
@@ -59,6 +65,8 @@ public class EnoncePanel extends JPanel {
 		JTextArea enonce = new JTextArea();
 		enonce.setBackground(Color.LIGHT_GRAY);
 		enonce.setText("Entrer l'\u00E9nonc\u00E9 de la question ici");
+		enonce.setLineWrap(true);
+		enonce.setWrapStyleWord(true);
 		//add(enonce, BorderLayout.CENTER);
 
 		JScrollPane jsp = new JScrollPane (enonce);

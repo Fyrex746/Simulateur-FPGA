@@ -52,7 +52,7 @@ public class DynamicTreeDemo extends JPanel
     private static String ADD_COMMAND = "add";
     private static String REMOVE_COMMAND = "remove";
     
-    private DynamicTree treePanel;
+    DynamicTree treePanel;
 
     public DynamicTreeDemo() {
         super(new BorderLayout());
