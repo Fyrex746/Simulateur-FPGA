@@ -61,11 +61,11 @@ public class DynamicTreeDemo extends JPanel
         treePanel = new DynamicTree();
         populateTree(treePanel);
 
-        JButton addButton = new JButton("Add");
+        JButton addButton = new JButton("Ajouter");
         addButton.setActionCommand(ADD_COMMAND);
         addButton.addActionListener(this);
         
-        JButton removeButton = new JButton("Remove");
+        JButton removeButton = new JButton("Supprimer");
         removeButton.setActionCommand(REMOVE_COMMAND);
         removeButton.addActionListener(this);
 

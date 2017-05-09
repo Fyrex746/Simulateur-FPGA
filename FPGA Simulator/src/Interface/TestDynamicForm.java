@@ -125,7 +125,8 @@ public class TestDynamicForm extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        AnswerPanel newContentPane = new AnswerPanel(5);
+        QuestionTotalPanel newContentPane = new QuestionTotalPanel();
+        //SimulatorAnswerDynamicPanel newContentPane = new SimulatorAnswerDynamicPanel();
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 

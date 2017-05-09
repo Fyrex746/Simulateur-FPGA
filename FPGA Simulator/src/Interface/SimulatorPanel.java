@@ -80,6 +80,8 @@ public class SimulatorPanel extends JPanel {
 		textField.setForeground(Color.BLACK);
 		textField.setColumns(10);
 		textField.setBackground(Color.GREEN);
+		
+		
 		//------------------------------------------------------------------------------
 		JPanel SimulatorSettingsPanel = new JPanel();
 		SimulatorSettingsPanel.setVisible(false);
@@ -217,7 +219,7 @@ public class SimulatorPanel extends JPanel {
 			isActive=false;
 			add(checkboxVisibleSimulatorPanel, BorderLayout.CENTER);
 		}
-		System.out.println("SimulatorPanel: "+isActive);
+		//System.out.println("SimulatorPanel: "+isActive);
 		revalidate();
 		repaint();
 		setVisible(false);
