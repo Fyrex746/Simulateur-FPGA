@@ -1,6 +1,9 @@
 package Interface;
 
 import javax.swing.JPanel;
+
+import Exam.Question;
+
 import java.awt.BorderLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -13,11 +16,14 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SimulatorAnswerDynamicPanel() {
+	public SimulatorAnswerDynamicPanel(){
+		this(new Question());
+	}
+	public SimulatorAnswerDynamicPanel(Question qu) {
 		setLayout(new BorderLayout(0, 0));
 		
-		answerPanel = new AnswerPanel();
-		simulatorPanel = new SimulatorPanel();
+		answerPanel = new AnswerPanel(3,qu);
+		simulatorPanel = new SimulatorPanel(qu);
 		simulatorPanel.addContainerListener(new ContainerAdapter() {
 			@Override
 			public void componentAdded(ContainerEvent arg0) {

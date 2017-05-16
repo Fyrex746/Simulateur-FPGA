@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Exam.Question;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ActionEvent;
@@ -55,6 +58,7 @@ public class FenetreProf extends JFrame {
 	private JSpinner sSpinner;
 	private JPanel menuPanel;
 	private JButton btnGenere;
+	private Question qu=new Question();
 
 	/**
 	 * Launch the application.
@@ -214,12 +218,12 @@ public class FenetreProf extends JFrame {
 		});
 		contentPane.add(dynamicTreeDemo, BorderLayout.WEST);
 		
-		questionTotalPanel = new QuestionTotalPanel(1,1,0);
+		questionTotalPanel = new QuestionTotalPanel(1,1,0, qu);
 		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
 	}
 	
 	public void updateQuestionPanel(){
-		questionTotalPanel = new QuestionTotalPanel(dynamicTreeDemo.treePanel.ExSel,dynamicTreeDemo.treePanel.QuSel,dynamicTreeDemo.treePanel.SsQuSel);
+		questionTotalPanel = new QuestionTotalPanel(dynamicTreeDemo.treePanel.ExSel,dynamicTreeDemo.treePanel.QuSel,dynamicTreeDemo.treePanel.SsQuSel, qu);
 	}
 
 }

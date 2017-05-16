@@ -54,7 +54,10 @@ public class DynamicTreeDemo extends JPanel
     
     DynamicTree treePanel;
 
-    public DynamicTreeDemo() {
+    public DynamicTreeDemo(){
+    	this(true);
+    }
+    public DynamicTreeDemo(boolean afficherBoutons) {
         super(new BorderLayout());
         
         //Create the components.
@@ -76,7 +79,7 @@ public class DynamicTreeDemo extends JPanel
         JPanel panel = new JPanel(new GridLayout(0,2));
         panel.add(addButton);
         panel.add(removeButton);
-        add(panel, BorderLayout.SOUTH);
+        if(afficherBoutons) add(panel, BorderLayout.SOUTH);
         treePanel.tree.expandRow(0);
         treePanel.tree.expandRow(1);
     }

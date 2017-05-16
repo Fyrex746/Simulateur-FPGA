@@ -14,6 +14,10 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import Exam.Question;
+import Exam.QuestionQCM;
+import Exam.QuestionText;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -38,16 +42,17 @@ public class AnswerPanel extends JPanel {
 	private JPanel currentPanel;
 	private JScrollPane jsp;
 	
-	public AnswerPanel(){
-		this(3);
-	}
-	public AnswerPanel(int NbAnsInitial) {
+	/*public AnswerPanel(){
+		this(3, new Question());
+	}*/
+	public AnswerPanel(int NbAnsInitial, Question qu) {
 		if(NbAnsInitial>26 || NbAnsInitial<2){
 			NbPossibleAns=3;
 		}
 		else{
 			NbPossibleAns=NbAnsInitial;
 		}
+		((QuestionQCM) qu.getQuParam()).setNumberAnswers(NbPossibleAns);
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel AnswerSettingsPanel = new JPanel();
@@ -83,7 +88,9 @@ public class AnswerPanel extends JPanel {
 		AnswerType.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				typeReponse = arg0.getItem().toString();
-				updateCentralPanel();
+				if(typeReponse=="QCM") qu.setQuParam(new QuestionQCM());
+				if(typeReponse=="Zone de texte") qu.setQuParam(new QuestionText());
+				updateCentralPanel(qu);
 				//JOptionPane.showMessageDialog(null, typeReponse);
 			}
 		});
@@ -102,6 +109,7 @@ public class AnswerPanel extends JPanel {
 						PossibleMultipleAnsw = chckbxRponsesMultiples.isSelected();
 						if(isInteger(NbQCMAns.getText()) && Integer.parseInt(NbQCMAns.getText())>1 && Integer.parseInt(NbQCMAns.getText())<27){
 							NbPossibleAns = Integer.parseInt(NbQCMAns.getText());
+							((QuestionQCM) qu.getQuParam()).setNumberAnswers(NbPossibleAns);
 						}
 						else{
 							JOptionPane.showMessageDialog(null, "Veuillez entrer un entier entre 2 et 26");
@@ -116,7 +124,7 @@ public class AnswerPanel extends JPanel {
 						}
 					}
 					AnswerSettingsPanel.setVisible(false);
-					updateCentralPanel();
+					updateCentralPanel(qu);
 				} else {
 					JOptionPane.showMessageDialog(null, "Pas de r\u00E9glages possibles");
 				}
@@ -126,12 +134,13 @@ public class AnswerPanel extends JPanel {
 		currentPanel=new JPanel();
 		jsp = new JScrollPane (currentPanel);
 		add(jsp, BorderLayout.CENTER);
-		updateCentralPanel();
+		updateCentralPanel(qu);
 	}
-	private void updateCentralPanel(){
+	private void updateCentralPanel(Question qu){
 		remove(currentPanel);
 		remove(jsp);
 		if (AnswerType.getSelectedItem() == "QCM"){
+			((QuestionQCM) qu.getQuParam()).setAllowMultipleChoice(chckbxRponsesMultiples.isSelected());
 			if(chckbxRponsesMultiples.isSelected()){
 				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns);
 				currentPanel=checkDynamicForm;

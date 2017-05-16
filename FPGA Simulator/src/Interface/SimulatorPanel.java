@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import Exam.Question;
+
 import javax.swing.JCheckBox;
 
 public class SimulatorPanel extends JPanel {
@@ -34,7 +37,13 @@ public class SimulatorPanel extends JPanel {
 	private JTabbedPane SimulatorChoicePanel;
 	boolean isActive=true;
 	
-	public SimulatorPanel() {
+	/*public SimulatorPanel() {
+		this(new Question(),true);
+	}*/
+	public SimulatorPanel(Question qu){
+		this(qu, true);
+	}
+	public SimulatorPanel(Question qu,boolean Activer) {
 		setLayout(new BorderLayout(0, 0));
 		
 		checkboxVisibleSimulatorPanel = new JPanel();
@@ -46,19 +55,23 @@ public class SimulatorPanel extends JPanel {
 		chckbxActiverLeSimulateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				chckbxAfficherLeSimulateur.setVisible(chckbxActiverLeSimulateur.isSelected());
+				qu.setUseSimulator(chckbxActiverLeSimulateur.isSelected());
 				updatePanel();
 			}
 		});
 		chckbxActiverLeSimulateur.setSelected(true);
-		checkboxVisibleSimulatorPanel.add(chckbxActiverLeSimulateur);
+		qu.setUseSimulator(chckbxActiverLeSimulateur.isSelected());
+		if(Activer) checkboxVisibleSimulatorPanel.add(chckbxActiverLeSimulateur);
 		
 		chckbxAfficherLeSimulateur = new JCheckBox("Afficher le simulateur");
 		chckbxAfficherLeSimulateur.setSelected(true);
 		chckbxAfficherLeSimulateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				qu.setShowSimulator(chckbxAfficherLeSimulateur.isSelected());
 				updatePanel();
 			}
 		});
+		qu.setShowSimulator(chckbxAfficherLeSimulateur.isSelected());
 		checkboxVisibleSimulatorPanel.add(chckbxAfficherLeSimulateur);
 		
 		SimulatorChoicePanel = new JTabbedPane(JTabbedPane.TOP);
