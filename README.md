@@ -1,2 +1,2 @@
 # Simulateur-FPGA
-Partie exercice projet 2A
+Partie exercice du projet 2A
