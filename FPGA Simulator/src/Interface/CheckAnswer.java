@@ -34,7 +34,7 @@ public class CheckAnswer extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=chckbxA.isSelected();
-				System.out.println("Réponse "+s+": "+chckbxA.isSelected());
+				//System.out.println("Réponse "+s+": "+chckbxA.isSelected());
 			}
 		});
 		chckbxA.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
