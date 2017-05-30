@@ -48,6 +48,9 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+
+import Exam.*;
+
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -60,7 +63,7 @@ public class DynamicTree extends JPanel {
     int ExSel, QuSel, SsQuSel;
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-    public DynamicTree() {
+    public DynamicTree(Subject sujet) {
         super(new GridLayout(1,0));
         rootNode = new DefaultMutableTreeNode("Table des mati\u00E8res");
         treeModel = new DefaultTreeModel(rootNode);
@@ -173,18 +176,19 @@ public class DynamicTree extends JPanel {
     	    		ExSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Exercice ", ""));
     	    		QuSel=Integer.parseInt(selectedNode.toString().replaceAll("Question ", ""));
     	    		SsQuSel=0;
+    	    		
     	    	}
     	    	else if(tree.getSelectionPath().getPathCount()==4){
     	    		ExSel=Integer.parseInt(selectedNode.getParent().getParent().toString().replaceAll("Exercice ", ""));
     	    		QuSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Question ", ""));
     	    		SsQuSel=Integer.parseInt(selectedNode.toString().replaceAll("Sous-question ", ""));
     	    	}
-    	    	/*if(SsQuSel==0){
-    	    		JOptionPane.showMessageDialog(null, "Exercice -"+ExSel+"-\n\t Question "+QuSel);
+    	    	if(SsQuSel==0){
+    	    		JOptionPane.showMessageDialog(null, "Exercice "+ExSel+"\n\t Question "+QuSel);
     	    	}
     	    	else{
     	    		JOptionPane.showMessageDialog(null, "Exercice -"+ExSel+"-\n\t Question "+QuSel+"."+SsQuSel);
-    	    	}*/
+    	    	}//*/
     	    	//JOptionPane.showMessageDialog(null, selectedNode.toString());
     	    }
     	  }

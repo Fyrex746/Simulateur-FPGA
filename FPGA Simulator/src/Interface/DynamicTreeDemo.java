@@ -37,6 +37,7 @@ package Interface;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -47,21 +48,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import Exam.*;
+
 public class DynamicTreeDemo extends JPanel 
                              implements ActionListener {
     private static String ADD_COMMAND = "add";
     private static String REMOVE_COMMAND = "remove";
-    
+    private static Subject sujet;
     DynamicTree treePanel;
 
-    public DynamicTreeDemo(){
-    	this(true);
-    }
-    public DynamicTreeDemo(boolean afficherBoutons) {
+    public DynamicTreeDemo(boolean afficherBoutons,Subject s) {
         super(new BorderLayout());
-        
+        sujet=s;
         //Create the components.
-        treePanel = new DynamicTree();
+        treePanel = new DynamicTree(sujet);
         populateTree(treePanel);
 
         JButton addButton = new JButton("Ajouter");
@@ -85,14 +85,19 @@ public class DynamicTreeDemo extends JPanel
     }
 
     public void populateTree(DynamicTree treePanel) {
-        String p1Name = new String("Exercice 1");
-        String c1Name = new String("Question 1");
-
+        String p1Name = new String("Exercice ");
+        String c1Name = new String("Question ");
         DefaultMutableTreeNode p1;
-
-        p1 = treePanel.addObject(null, p1Name);
+        for(int i=0;i<sujet.getListExercise().size();i++){
+        	p1=treePanel.addObject("Exercice "+(i+1));
+        	for(int j=0;j<((Exercise) sujet.getListExercise().get(i)).getListQuestions().size();j++){
+        		treePanel.addObject(p1,"Question "+(j+1));
+        	}
+        	//p1 = treePanel.addObject(null, p1Name+(i+1));
+        }
+        //p1 = treePanel.addObject(null, p1Name);
+        //treePanel.addObject(p1, c1Name);
         
-        treePanel.addObject(p1, c1Name);
     }
     
     public void actionPerformed(ActionEvent e) {
@@ -105,12 +110,16 @@ public class DynamicTreeDemo extends JPanel
         	else{
         		int NbEnfants=treePanel.treeModel.getChildCount(treePanel.tree.getLastSelectedPathComponent())+1;
         		if(treePanel.tree.getSelectionPath().getPathCount()==1){
-        			treePanel.addObject("Exercice " + NbEnfants);}
+        			treePanel.addObject("Exercice " + NbEnfants);
+        			sujet.getListExercise().add(new Exercise(NbEnfants));}
         		else if (treePanel.tree.getSelectionPath().getPathCount()==2){
-        			treePanel.addObject("Question " + NbEnfants);}
-        		else if (treePanel.tree.getSelectionPath().getPathCount()==3){
+        			treePanel.addObject("Question " + NbEnfants);
+        			((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1)).getListQuestions().add(new Question(NbEnfants,((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1))));
+        			}
+        		/*else if (treePanel.tree.getSelectionPath().getPathCount()==3){ // creation Sous-Question
         			treePanel.addObject("Sous-question " + NbEnfants);
-        		}
+        			//((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1)).getListQuestions().add(new Question(NbEnfants,0));
+        		}//*/
         		else{
         			JOptionPane.showMessageDialog(null, "Inutile d'aller si loin!");
         		}
@@ -122,7 +131,17 @@ public class DynamicTreeDemo extends JPanel
     			JOptionPane.showMessageDialog(null, "Elément impossible à retirer");
             }
             else{
+            	if(treePanel.tree.getSelectionPath().getPathCount()==2){
+            		sujet.getListExercise().remove(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1);
+            	}
+            	else if(treePanel.tree.getSelectionPath().getPathCount()==3){
+            		((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).getParent().toString().replaceAll("Exercice ", ""))-1)).getListQuestions().remove(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Question ", ""))-1);
+            	}
+            	else if(treePanel.tree.getSelectionPath().getPathCount()==4){ // retrait sous-question du sujet
+            		
+            	}
             	treePanel.removeCurrentNode();
+            	
             }
         }
     }
@@ -138,7 +157,7 @@ public class DynamicTreeDemo extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        DynamicTreeDemo newContentPane = new DynamicTreeDemo();
+        DynamicTreeDemo newContentPane = new DynamicTreeDemo(true,sujet);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 

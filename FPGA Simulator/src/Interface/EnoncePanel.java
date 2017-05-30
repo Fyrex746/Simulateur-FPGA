@@ -29,7 +29,7 @@ public class EnoncePanel extends JPanel {
 	/*public EnoncePanel() {
 		this(1,1,0, new Question());
 	}*/
-	public EnoncePanel(int nbEx, int nbQu, int nbSsQu, Question qu) {
+	public EnoncePanel(Question qu) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel NumerotationPanel = new JPanel();
@@ -41,7 +41,7 @@ public class EnoncePanel extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		NumerotationPanel.add(ExNbPanel, BorderLayout.NORTH);
 		
-		JLabel lblExercice = new JLabel("Exercice "+nbEx);
+		JLabel lblExercice = new JLabel("Exercice "+qu.getExercice().getExNb());
 		ExNbPanel.add(lblExercice);
 		
 		//JTextArea txtrTitreDeLexercice = new JTextArea(); //retour a la ligne possible
@@ -53,8 +53,7 @@ public class EnoncePanel extends JPanel {
 			}
 		});
 		ExNbPanel.add(txtrTitreDeLexercice);
-		txtrTitreDeLexercice.setText("Titre de l'exercice");
-		qu.getExercice().setTitle(txtrTitreDeLexercice.getText());
+		txtrTitreDeLexercice.setText(qu.getExercice().getTitle());
 		
 		JPanel QuNbPanel = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) QuNbPanel.getLayout();
@@ -62,11 +61,11 @@ public class EnoncePanel extends JPanel {
 		NumerotationPanel.add(QuNbPanel, BorderLayout.SOUTH);
 		
 		JLabel lblQuestion;
-		if(nbSsQu<1){
-			lblQuestion = new JLabel("Question "+nbQu);
+		if(qu.getSsQuNb()<1){
+			lblQuestion = new JLabel("Question "+qu.getQuNb());
 		}
 		else{
-			lblQuestion = new JLabel("Question "+nbQu+"."+nbSsQu);
+			lblQuestion = new JLabel("Question "+qu.getQuNb()+"."+qu.getSsQuNb());
 		}
 		QuNbPanel.add(lblQuestion);
 		
@@ -78,8 +77,7 @@ public class EnoncePanel extends JPanel {
 				qu.setTitle(txtrTitreDeLa.getText());
 			}
 		});
-		txtrTitreDeLa.setText("Titre de la question (si n\u00E9cessaire)");
-		qu.setTitle(txtrTitreDeLa.getText());
+		txtrTitreDeLa.setText(qu.getTitle());
 		QuNbPanel.add(txtrTitreDeLa);
 		
 		JTextArea enonce = new JTextArea();
@@ -90,10 +88,9 @@ public class EnoncePanel extends JPanel {
 			}
 		});
 		enonce.setBackground(Color.LIGHT_GRAY);
-		enonce.setText("Entrer l'\u00E9nonc\u00E9 de la question ici");
+		enonce.setText(qu.getDescription());
 		enonce.setLineWrap(true);
 		enonce.setWrapStyleWord(true);
-		qu.setDescription(enonce.getText());
 		//add(enonce, BorderLayout.CENTER);
 
 		JScrollPane jsp = new JScrollPane (enonce);

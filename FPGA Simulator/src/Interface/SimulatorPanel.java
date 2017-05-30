@@ -59,19 +59,17 @@ public class SimulatorPanel extends JPanel {
 				updatePanel();
 			}
 		});
-		chckbxActiverLeSimulateur.setSelected(true);
-		qu.setUseSimulator(chckbxActiverLeSimulateur.isSelected());
+		chckbxActiverLeSimulateur.setSelected(qu.getUseSimulator());
 		if(Activer) checkboxVisibleSimulatorPanel.add(chckbxActiverLeSimulateur);
 		
 		chckbxAfficherLeSimulateur = new JCheckBox("Afficher le simulateur");
-		chckbxAfficherLeSimulateur.setSelected(true);
+		chckbxAfficherLeSimulateur.setSelected(qu.getShowSimulator());
 		chckbxAfficherLeSimulateur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				qu.setShowSimulator(chckbxAfficherLeSimulateur.isSelected());
 				updatePanel();
 			}
 		});
-		qu.setShowSimulator(chckbxAfficherLeSimulateur.isSelected());
 		checkboxVisibleSimulatorPanel.add(chckbxAfficherLeSimulateur);
 		
 		SimulatorChoicePanel = new JTabbedPane(JTabbedPane.TOP);

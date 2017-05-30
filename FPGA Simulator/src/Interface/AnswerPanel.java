@@ -22,18 +22,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AnswerPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	private int NbPossibleAns;
+	private int NbPossibleAns=3;
 	private JTextField NbQCMAns;
 	private boolean PossibleMultipleAnsw;
 	private String typeReponse;
@@ -45,14 +48,8 @@ public class AnswerPanel extends JPanel {
 	/*public AnswerPanel(){
 		this(3, new Question());
 	}*/
-	public AnswerPanel(int NbAnsInitial, Question qu) {
-		if(NbAnsInitial>26 || NbAnsInitial<2){
-			NbPossibleAns=3;
-		}
-		else{
-			NbPossibleAns=NbAnsInitial;
-		}
-		((QuestionQCM) qu.getQuParam()).setNumberAnswers(NbPossibleAns);
+	public AnswerPanel(Question qu) {
+		if(qu.getAnswType()=="QCM") NbPossibleAns=((QuestionQCM)qu.getQuParam()).getNumberAnswers();
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel AnswerSettingsPanel = new JPanel();
@@ -61,7 +58,7 @@ public class AnswerPanel extends JPanel {
 		AnswerSettingsPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		
 		chckbxRponsesMultiples = new JCheckBox("R\u00E9ponses multiples");
-		chckbxRponsesMultiples.setSelected(true); //valeur par défaut
+		if(qu.getAnswType()=="QCM") chckbxRponsesMultiples.setSelected(((QuestionQCM)qu.getQuParam()).getAllowMultipleChoice()); //valeur par défaut
 		AnswerSettingsPanel.add(chckbxRponsesMultiples);
 		
 		JPanel NbAnsPanel = new JPanel();
@@ -85,16 +82,22 @@ public class AnswerPanel extends JPanel {
 		
 		AnswerType = new JComboBox();
 		AnswerType.setMaximumRowCount(3);
-		AnswerType.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				typeReponse = arg0.getItem().toString();
-				if(typeReponse=="QCM") qu.setQuParam(new QuestionQCM());
-				if(typeReponse=="Zone de texte") qu.setQuParam(new QuestionText());
-				updateCentralPanel(qu);
-				//JOptionPane.showMessageDialog(null, typeReponse);
+		AnswerType.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte", "R\u00E9ponse sur le simulateur"}));
+		AnswerType.setSelectedItem(qu.getAnswType());
+		typeReponse = AnswerType.getSelectedItem().toString();
+		AnswerType.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(AnswerType.getSelectedItem().toString()!=qu.getAnswType()){
+					typeReponse = AnswerType.getSelectedItem().toString();
+					qu.setAnswType(typeReponse);
+					if(typeReponse=="QCM") qu.setQuParam(new QuestionQCM());
+					if(typeReponse=="Zone de texte") qu.setQuParam(new QuestionText());
+					updateCentralPanel(qu);
+				}
+				
 			}
 		});
-		AnswerType.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte", "R\u00E9ponse sur le simulateur"}));
 		AnswerType.setToolTipText("");
 		AnswerTypeSettingsPanel.add(AnswerType);
 		
@@ -107,6 +110,7 @@ public class AnswerPanel extends JPanel {
 					int result = JOptionPane.showConfirmDialog(null, AnswerSettingsPanel, "", JOptionPane.OK_CANCEL_OPTION);
 					if (result == JOptionPane.OK_OPTION) {
 						PossibleMultipleAnsw = chckbxRponsesMultiples.isSelected();
+						((QuestionQCM) qu.getQuParam()).setAllowMultipleChoice(PossibleMultipleAnsw);
 						if(isInteger(NbQCMAns.getText()) && Integer.parseInt(NbQCMAns.getText())>1 && Integer.parseInt(NbQCMAns.getText())<27){
 							NbPossibleAns = Integer.parseInt(NbQCMAns.getText());
 							((QuestionQCM) qu.getQuParam()).setNumberAnswers(NbPossibleAns);
@@ -117,11 +121,9 @@ public class AnswerPanel extends JPanel {
 						}
 					} else {
 						NbQCMAns.setText(String.valueOf(NbPossibleAns));
-						if (PossibleMultipleAnsw) {
-							chckbxRponsesMultiples.setSelected(true);
-						} else {
-							chckbxRponsesMultiples.setSelected(false);
-						}
+						((QuestionQCM) qu.getQuParam()).setNumberAnswers(NbPossibleAns);
+						chckbxRponsesMultiples.setSelected(PossibleMultipleAnsw);
+						
 					}
 					AnswerSettingsPanel.setVisible(false);
 					updateCentralPanel(qu);
@@ -140,20 +142,25 @@ public class AnswerPanel extends JPanel {
 		remove(currentPanel);
 		remove(jsp);
 		if (AnswerType.getSelectedItem() == "QCM"){
-			((QuestionQCM) qu.getQuParam()).setAllowMultipleChoice(chckbxRponsesMultiples.isSelected());
 			if(chckbxRponsesMultiples.isSelected()){
-				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns);
+				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns, qu);
 				currentPanel=checkDynamicForm;
 				add(currentPanel, BorderLayout.CENTER);
 			}
 			else{
-				RadioDynamicForm radioDynamicForm= new RadioDynamicForm(NbPossibleAns);
+				RadioDynamicForm radioDynamicForm= new RadioDynamicForm(NbPossibleAns,qu);
 				currentPanel=radioDynamicForm;
 				add(currentPanel, BorderLayout.CENTER);
 			}
 		}
 		else if(AnswerType.getSelectedItem() == "Zone de texte"){
 			JTextArea txtrTextarea = new JTextArea();
+			txtrTextarea.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent arg0) {
+					((QuestionText) qu.getQuParam()).setCorrectAnswer(txtrTextarea.getText());
+				}
+			});
 			txtrTextarea.setText("Entrer la réponse");
 			txtrTextarea.setBackground(Color.LIGHT_GRAY);
 			currentPanel=new JPanel();

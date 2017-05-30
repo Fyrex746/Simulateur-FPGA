@@ -16,13 +16,13 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SimulatorAnswerDynamicPanel(){
+	/*public SimulatorAnswerDynamicPanel(){
 		this(new Question());
-	}
+	}//*/
 	public SimulatorAnswerDynamicPanel(Question qu) {
 		setLayout(new BorderLayout(0, 0));
 		
-		answerPanel = new AnswerPanel(3,qu);
+		answerPanel = new AnswerPanel(qu);
 		simulatorPanel = new SimulatorPanel(qu);
 		simulatorPanel.addContainerListener(new ContainerAdapter() {
 			@Override

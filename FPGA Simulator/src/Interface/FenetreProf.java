@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Exam.Question;
+import Exam.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -58,7 +58,8 @@ public class FenetreProf extends JFrame {
 	private JSpinner sSpinner;
 	private JPanel menuPanel;
 	private JButton btnGenere;
-	private Question qu=new Question();
+	private Subject sujet = new Subject();
+	//private Question qu=new Question();
 
 	/**
 	 * Launch the application.
@@ -202,7 +203,7 @@ public class FenetreProf extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		dynamicTreeDemo = new DynamicTreeDemo();
+		dynamicTreeDemo = new DynamicTreeDemo(true,sujet);
 		dynamicTreeDemo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -218,12 +219,12 @@ public class FenetreProf extends JFrame {
 		});
 		contentPane.add(dynamicTreeDemo, BorderLayout.WEST);
 		
-		questionTotalPanel = new QuestionTotalPanel(1,1,0, qu);
+		questionTotalPanel = new QuestionTotalPanel((Question) ((Exercise) sujet.getListExercise().get(0)).getListQuestions().get(0));
 		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
 	}
 	
 	public void updateQuestionPanel(){
-		questionTotalPanel = new QuestionTotalPanel(dynamicTreeDemo.treePanel.ExSel,dynamicTreeDemo.treePanel.QuSel,dynamicTreeDemo.treePanel.SsQuSel, qu);
+		questionTotalPanel = new QuestionTotalPanel((Question) ((Exercise) sujet.getListExercise().get(0)).getListQuestions().get(0));
 	}
 
 }
