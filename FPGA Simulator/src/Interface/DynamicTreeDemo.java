@@ -42,6 +42,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -75,6 +78,12 @@ public class DynamicTreeDemo extends JPanel
         //Lay everything out.
         treePanel.setPreferredSize(new Dimension(220, 200));
         add(treePanel, BorderLayout.CENTER);
+        treePanel.addContainerListener(new ContainerAdapter() {
+			@Override
+			public void componentAdded(ContainerEvent arg0) {
+				update();
+			}
+		});
 
         JPanel panel = new JPanel(new GridLayout(0,2));
         panel.add(addButton);
@@ -151,6 +160,10 @@ public class DynamicTreeDemo extends JPanel
      * this method should be invoked from the
      * event-dispatching thread.
      */
+    protected void update(){
+    	add(treePanel, BorderLayout.CENTER);
+    	//JOptionPane.showMessageDialog(null, "Actualisation ");
+	}
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("DynamicTreeDemo");

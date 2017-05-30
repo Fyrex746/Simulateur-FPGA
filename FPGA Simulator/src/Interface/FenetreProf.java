@@ -13,6 +13,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuBar;
@@ -204,6 +206,13 @@ public class FenetreProf extends JFrame {
 		setContentPane(contentPane);
 		
 		dynamicTreeDemo = new DynamicTreeDemo(true,sujet);
+		dynamicTreeDemo.addContainerListener(new ContainerAdapter() {
+			@Override
+			public void componentAdded(ContainerEvent arg0) {
+				//JOptionPane.showMessageDialog(null, "Actualisation ");
+				updateQuestionPanel();
+			}
+		});
 		dynamicTreeDemo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -219,12 +228,19 @@ public class FenetreProf extends JFrame {
 		});
 		contentPane.add(dynamicTreeDemo, BorderLayout.WEST);
 		
-		questionTotalPanel = new QuestionTotalPanel((Question) ((Exercise) sujet.getListExercise().get(0)).getListQuestions().get(0));
+		questionTotalPanel = new QuestionTotalPanel(sujet.getCurrentQuestion());
 		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
 	}
 	
 	public void updateQuestionPanel(){
-		questionTotalPanel = new QuestionTotalPanel((Question) ((Exercise) sujet.getListExercise().get(0)).getListQuestions().get(0));
+		//JOptionPane.showMessageDialog(null, "Actualisation panneau de questions");
+		contentPane.remove(questionTotalPanel);
+		questionTotalPanel = new QuestionTotalPanel(sujet.getCurrentQuestion());
+		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
+		revalidate();
+		repaint();
+		/*setVisible(false);
+		setVisible(true);//*/
 	}
 
 }

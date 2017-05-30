@@ -6,9 +6,9 @@ public class Exercise {
 	private String title="Titre de l'exercice";
 	private ArrayList ListQuestions= new ArrayList();
 	
-	public Exercise(){
+	/*public Exercise(){
 		this(1);
-	}
+	}//*/
 	public Exercise(int n){
 		System.out.println("Nouvel exercice "+n);
 		setExNb(n);
@@ -21,7 +21,7 @@ public class Exercise {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-		System.out.println("Title Exercise:"+title);
+		//System.out.println("Title Exercise:"+title);
 	}
 	/**
 	 * @return the nbQuestions

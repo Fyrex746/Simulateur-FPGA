@@ -30,7 +30,7 @@ public class Question {
 	 */
 	public void setExercice(Exercise exercice) {
 		this.exercice = exercice;
-		System.out.println("Exercise:"+exercice);
+		//System.out.println("Exercise:"+exercice);
 	}
 	/**
 	 * @return the title
@@ -43,7 +43,7 @@ public class Question {
 	 */
 	public void setTitle(String title) {
 		this.title = title;
-		System.out.println("Title Question:"+title);
+		//System.out.println("Title Question:"+title);
 	}
 	/**
 	 * @return the description
@@ -56,7 +56,7 @@ public class Question {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-		System.out.println("Enonce:"+description);
+		//System.out.println("Enonce:"+description);
 	}
 	/**
 	 * @return the useSimulator
@@ -69,7 +69,7 @@ public class Question {
 	 */
 	public void setUseSimulator(Boolean useSimulator) {
 		this.useSimulator = useSimulator;
-		System.out.println("Simulator active:"+useSimulator);
+		//System.out.println("Simulator active:"+useSimulator);
 	}
 	/**
 	 * @return the showSimulator
@@ -82,7 +82,7 @@ public class Question {
 	 */
 	public void setShowSimulator(Boolean showSimulator) {
 		this.showSimulator = showSimulator;
-		System.out.println("Show simulator:"+showSimulator);
+		//System.out.println("Show simulator:"+showSimulator);
 	}
 	/**
 	 * @return the quParam
@@ -119,6 +119,7 @@ public class Question {
 	 */
 	public void setQuNb(int quNb) {
 		QuNb = quNb;
+		//System.out.println("Qu"+quNb);
 	}
 	/**
 	 * @return the ssQuNb

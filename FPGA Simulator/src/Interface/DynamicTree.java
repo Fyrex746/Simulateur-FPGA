@@ -62,9 +62,12 @@ public class DynamicTree extends JPanel {
     protected JTree tree;
     int ExSel, QuSel, SsQuSel;
 	private Toolkit toolkit = Toolkit.getDefaultToolkit();
-
+	private Subject sujet;
+	private JScrollPane scrollPane;
+	
     public DynamicTree(Subject sujet) {
         super(new GridLayout(1,0));
+        this.sujet=sujet;
         rootNode = new DefaultMutableTreeNode("Table des mati\u00E8res");
         treeModel = new DefaultTreeModel(rootNode);
         treeModel.addTreeModelListener(new MyTreeModelListener());
@@ -74,7 +77,7 @@ public class DynamicTree extends JPanel {
                 (TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setShowsRootHandles(true);
         tree.addTreeSelectionListener(new SelectionListener());
-        JScrollPane scrollPane = new JScrollPane(tree);
+        scrollPane = new JScrollPane(tree);
         add(scrollPane);
     }
 
@@ -176,14 +179,21 @@ public class DynamicTree extends JPanel {
     	    		ExSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Exercice ", ""));
     	    		QuSel=Integer.parseInt(selectedNode.toString().replaceAll("Question ", ""));
     	    		SsQuSel=0;
-    	    		
     	    	}
     	    	else if(tree.getSelectionPath().getPathCount()==4){
     	    		ExSel=Integer.parseInt(selectedNode.getParent().getParent().toString().replaceAll("Exercice ", ""));
     	    		QuSel=Integer.parseInt(selectedNode.getParent().toString().replaceAll("Question ", ""));
     	    		SsQuSel=Integer.parseInt(selectedNode.toString().replaceAll("Sous-question ", ""));
     	    	}
-    	    	if(SsQuSel==0){
+    	    	/*if(sujet.getCurrentQuestion()!=((Question) ((Exercise) sujet.getListExercise().get(ExSel-1)).getListQuestions().get(QuSel-1))){
+    	    		sujet.setCurrentQuestion((Question) ((Exercise) sujet.getListExercise().get(ExSel-1)).getListQuestions().get(QuSel-1));
+        	    	remove(scrollPane);
+        	    	add(scrollPane);
+    	    	}//*/
+    	    	sujet.setCurrentQuestion((Question) ((Exercise) sujet.getListExercise().get(ExSel-1)).getListQuestions().get(QuSel-1));
+    	    	remove(scrollPane);
+    	    	add(scrollPane);
+    	    	/*if(SsQuSel==0){
     	    		JOptionPane.showMessageDialog(null, "Exercice "+ExSel+"\n\t Question "+QuSel);
     	    	}
     	    	else{

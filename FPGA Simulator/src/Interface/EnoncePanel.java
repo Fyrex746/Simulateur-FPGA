@@ -66,7 +66,7 @@ public class EnoncePanel extends JPanel {
 		}
 		else{
 			lblQuestion = new JLabel("Question "+qu.getQuNb()+"."+qu.getSsQuNb());
-		}
+		}//*/
 		QuNbPanel.add(lblQuestion);
 		
 		//JTextArea txtrTitreDeLa = new JTextArea(); //retour a la ligne possible
