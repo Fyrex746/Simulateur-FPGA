@@ -27,7 +27,7 @@ public class RadioAnswer extends JPanel {
 	/*public RadioAnswer() {
 		this("A", new Question());
 	}*/
-	public RadioAnswer(String s, Question qu) {
+	public RadioAnswer(String s, Question qu, boolean isEditable) {
 		pos=(int) s.charAt(0)-65;
 		setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
@@ -46,6 +46,7 @@ public class RadioAnswer extends JPanel {
 		
 		//JTextPane txtpnRponse = new JTextPane(); //retour a la ligne possible
 		JTextField txtpnRponse = new JTextField(); //retour a la ligne impossible
+		txtpnRponse.setEditable(isEditable);
 		txtpnRponse.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {

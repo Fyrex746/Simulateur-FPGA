@@ -19,13 +19,13 @@ public class QuestionTotalPanel extends JPanel {
 	/*public QuestionTotalPanel() {
 		this(new Question());
 	}*/
-	public QuestionTotalPanel(Question qu) {
+	public QuestionTotalPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
-		EnoncePanel enoncePanel = new EnoncePanel(qu);
+		EnoncePanel enoncePanel = new EnoncePanel(qu,isEditable);
 		add(enoncePanel, BorderLayout.NORTH);
 		
-		SimulatorAnswerDynamicPanel simulatorAnswerDynamicPanel = new SimulatorAnswerDynamicPanel(qu);
+		SimulatorAnswerDynamicPanel simulatorAnswerDynamicPanel = new SimulatorAnswerDynamicPanel(qu,isEditable);
 		add(simulatorAnswerDynamicPanel, BorderLayout.CENTER);		
 
 	}

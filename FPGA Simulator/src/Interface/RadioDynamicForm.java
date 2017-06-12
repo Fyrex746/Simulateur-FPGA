@@ -16,10 +16,10 @@ public class RadioDynamicForm extends JPanel {
 	/*public RadioDynamicForm() {
 		this(3, new Question());
 	}*/
-	public RadioDynamicForm(int NbAnsw, Question qu) {
+	public RadioDynamicForm(int NbAnsw, Question qu, boolean isEditable) {
 		setLayout(new GridLayout(NbAnsw, 1, 0, 0));
 		for(int i=0;i<NbAnsw;i++){
-			RadioAnswer checkAnswer = new RadioAnswer(Character.toString((char) (i+65)), qu);
+			RadioAnswer checkAnswer = new RadioAnswer(Character.toString((char) (i+65)), qu, isEditable);
 			Answers.add(checkAnswer.rdbtn);
 			add(checkAnswer);	
 		}

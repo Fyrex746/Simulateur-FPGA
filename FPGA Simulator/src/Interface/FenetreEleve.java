@@ -35,7 +35,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JButton;
 import javax.swing.Timer;
 
-public class FenetreProf extends JFrame {
+public class FenetreEleve extends JFrame {
 
 	private JPanel contentPane,menuPanel,TimerPanel;
 	private QuestionTotalPanel questionTotalPanel;
@@ -50,7 +50,7 @@ public class FenetreProf extends JFrame {
 	private JSpinner hSpinner,minSpinner,sSpinner;
 	private JButton btnGenere;
 	private Subject sujet = new Subject();
-	private boolean isEditable=true;
+	private boolean isEditable=false;
 
 	/**
 	 * Launch the application.
@@ -59,7 +59,7 @@ public class FenetreProf extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FenetreProf frame = new FenetreProf();
+					FenetreEleve frame = new FenetreEleve();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,8 +71,8 @@ public class FenetreProf extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FenetreProf() {
-		setTitle("Fen\u00EAtre professeur");
+	public FenetreEleve() {
+		setTitle("Fen\u00EAtre \u00E9l\u00E8ve");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(-1, -1, 3840, 2160);
 		
@@ -199,7 +199,7 @@ public class FenetreProf extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Génération du fichier... à venir");
 			}
-		});
+		});//*/
 		
 		TimerPanel = new JPanel();
 		menuPanel.add(TimerPanel, BorderLayout.EAST);

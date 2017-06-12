@@ -48,7 +48,7 @@ public class AnswerPanel extends JPanel {
 	/*public AnswerPanel(){
 		this(3, new Question());
 	}*/
-	public AnswerPanel(Question qu) {
+	public AnswerPanel(Question qu, boolean isEditable) {
 		if(qu.getAnswType()=="QCM") NbPossibleAns=((QuestionQCM)qu.getQuParam()).getNumberAnswers();
 		setLayout(new BorderLayout(0, 0));
 		
@@ -76,7 +76,7 @@ public class AnswerPanel extends JPanel {
 		AnswerSettingsPanel.add(lblAttentionLeBouton);
 		
 		JPanel AnswerTypeSettingsPanel = new JPanel();
-		add(AnswerTypeSettingsPanel, BorderLayout.NORTH);
+		if(isEditable) add(AnswerTypeSettingsPanel, BorderLayout.NORTH);
 		FlowLayout flowLayout = (FlowLayout) AnswerTypeSettingsPanel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		
@@ -94,13 +94,13 @@ public class AnswerPanel extends JPanel {
 					qu.setAnswType(typeReponse);
 					if(typeReponse=="QCM") qu.setQuParam(new QuestionQCM());
 					if(typeReponse=="Zone de texte") qu.setQuParam(new QuestionText());
-					updateCentralPanel(qu);
+					updateCentralPanel(qu,isEditable);
 				}
 				
 			}
 		});
 		AnswerType.setToolTipText("");
-		AnswerTypeSettingsPanel.add(AnswerType);
+		if(isEditable) AnswerTypeSettingsPanel.add(AnswerType);
 		
 		JButton AnswerSettings = new JButton("Param\u00E8tres");
 		AnswerSettings.addActionListener(new ActionListener() {
@@ -127,29 +127,29 @@ public class AnswerPanel extends JPanel {
 						
 					}
 					AnswerSettingsPanel.setVisible(false);
-					updateCentralPanel(qu);
+					updateCentralPanel(qu,isEditable);
 				} else {
 					JOptionPane.showMessageDialog(null, "Pas de r\u00E9glages possibles");
 				}
 			}
 		});
-		AnswerTypeSettingsPanel.add(AnswerSettings);
+		if(isEditable) AnswerTypeSettingsPanel.add(AnswerSettings);
 		currentPanel=new JPanel();
 		jsp = new JScrollPane (currentPanel);
 		add(jsp, BorderLayout.CENTER);
-		updateCentralPanel(qu);
+		updateCentralPanel(qu,isEditable);
 	}
-	private void updateCentralPanel(Question qu){
+	private void updateCentralPanel(Question qu, boolean isEditable){
 		remove(currentPanel);
 		remove(jsp);
 		if (AnswerType.getSelectedItem() == "QCM"){
 			if(chckbxRponsesMultiples.isSelected()){
-				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns, qu);
+				CheckDynamicForm checkDynamicForm= new CheckDynamicForm(NbPossibleAns, qu, isEditable);
 				currentPanel=checkDynamicForm;
 				add(currentPanel, BorderLayout.CENTER);
 			}
 			else{
-				RadioDynamicForm radioDynamicForm= new RadioDynamicForm(NbPossibleAns,qu);
+				RadioDynamicForm radioDynamicForm= new RadioDynamicForm(NbPossibleAns, qu, isEditable);
 				currentPanel=radioDynamicForm;
 				add(currentPanel, BorderLayout.CENTER);
 			}

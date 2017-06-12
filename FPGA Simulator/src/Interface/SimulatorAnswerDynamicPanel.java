@@ -19,11 +19,11 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 	/*public SimulatorAnswerDynamicPanel(){
 		this(new Question());
 	}//*/
-	public SimulatorAnswerDynamicPanel(Question qu) {
+	public SimulatorAnswerDynamicPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
-		answerPanel = new AnswerPanel(qu);
-		simulatorPanel = new SimulatorPanel(qu);
+		answerPanel = new AnswerPanel(qu, isEditable);
+		simulatorPanel = new SimulatorPanel(qu, isEditable);
 		simulatorPanel.addContainerListener(new ContainerAdapter() {
 			@Override
 			public void componentAdded(ContainerEvent arg0) {

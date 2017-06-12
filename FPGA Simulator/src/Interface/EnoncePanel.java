@@ -29,7 +29,7 @@ public class EnoncePanel extends JPanel {
 	/*public EnoncePanel() {
 		this(1,1,0, new Question());
 	}*/
-	public EnoncePanel(Question qu) {
+	public EnoncePanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel NumerotationPanel = new JPanel();
@@ -46,14 +46,18 @@ public class EnoncePanel extends JPanel {
 		
 		//JTextArea txtrTitreDeLexercice = new JTextArea(); //retour a la ligne possible
 		JTextField txtrTitreDeLexercice = new JTextField(); //retour a la ligne impossible
+		txtrTitreDeLexercice.setEditable(isEditable);
 		txtrTitreDeLexercice.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				qu.getExercice().setTitle(txtrTitreDeLexercice.getText());
 			}
 		});
-		ExNbPanel.add(txtrTitreDeLexercice);
 		txtrTitreDeLexercice.setText(qu.getExercice().getTitle());
+		if(!isEditable && txtrTitreDeLexercice.getText().contains("Titre de l'exercice")){
+			txtrTitreDeLexercice.setVisible(false);
+		}
+		ExNbPanel.add(txtrTitreDeLexercice);
 		
 		JPanel QuNbPanel = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) QuNbPanel.getLayout();
@@ -71,6 +75,7 @@ public class EnoncePanel extends JPanel {
 		
 		//JTextArea txtrTitreDeLa = new JTextArea(); //retour a la ligne possible
 		JTextField txtrTitreDeLa = new JTextField(); //retour a la ligne impossible
+		txtrTitreDeLa.setEditable(isEditable);
 		txtrTitreDeLa.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -78,9 +83,13 @@ public class EnoncePanel extends JPanel {
 			}
 		});
 		txtrTitreDeLa.setText(qu.getTitle());
+		if(!isEditable && txtrTitreDeLa.getText().contains("Titre de la question")){
+			txtrTitreDeLa.setVisible(false);
+		}
 		QuNbPanel.add(txtrTitreDeLa);
 		
 		JTextArea enonce = new JTextArea();
+		enonce.setEditable(false);
 		enonce.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {

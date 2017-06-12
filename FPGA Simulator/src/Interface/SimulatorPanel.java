@@ -40,10 +40,10 @@ public class SimulatorPanel extends JPanel {
 	/*public SimulatorPanel() {
 		this(new Question(),true);
 	}*/
-	public SimulatorPanel(Question qu){
+	/*public SimulatorPanel(Question qu){
 		this(qu, true);
-	}
-	public SimulatorPanel(Question qu,boolean Activer) {
+	}//*/
+	public SimulatorPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
 		checkboxVisibleSimulatorPanel = new JPanel();
@@ -60,7 +60,7 @@ public class SimulatorPanel extends JPanel {
 			}
 		});
 		chckbxActiverLeSimulateur.setSelected(qu.getUseSimulator());
-		if(Activer) checkboxVisibleSimulatorPanel.add(chckbxActiverLeSimulateur);
+		if(isEditable) checkboxVisibleSimulatorPanel.add(chckbxActiverLeSimulateur);
 		
 		chckbxAfficherLeSimulateur = new JCheckBox("Afficher le simulateur");
 		chckbxAfficherLeSimulateur.setSelected(qu.getShowSimulator());

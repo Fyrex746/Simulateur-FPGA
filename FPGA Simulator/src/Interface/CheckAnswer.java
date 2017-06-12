@@ -24,34 +24,35 @@ public class CheckAnswer extends JPanel {
 	/*public CheckAnswer() {
 		this("A",new Question());
 	}*/
-	public CheckAnswer(String s, Question qu) {
+	public CheckAnswer(String s, Question qu,boolean isEditable) {
 		pos=(int) s.charAt(0)-65;
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		
-		JCheckBox chckbxA = new JCheckBox(s);
-		chckbxA.addActionListener(new ActionListener() {
+		JCheckBox chckbx = new JCheckBox(s);
+		chckbx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=chckbxA.isSelected();
-				//System.out.println("Réponse "+s+": "+chckbxA.isSelected());
+				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=chckbx.isSelected();
+				//System.out.println("Réponse "+s+": "+chckbx.isSelected());
 			}
 		});
-		chckbxA.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
-		add(chckbxA);
+		chckbx.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
+		add(chckbx);
 		
-		//JTextPane txtpnRponseA = new JTextPane(); //retour a la ligne possible
-		JTextField txtpnRponseA = new JTextField(); //retour a la ligne impossible
-		txtpnRponseA.addKeyListener(new KeyAdapter() {
+		//JTextPane txtpnRponse = new JTextPane(); //retour a la ligne possible
+		JTextField txtpnRponse = new JTextField(); //retour a la ligne impossible
+		txtpnRponse.setEditable(isEditable);
+		txtpnRponse.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				((QuestionQCM) qu.getQuParam()).getChoiceDescription()[pos]=txtpnRponseA.getText();
-				//System.out.println("Réponse "+s+": "+txtpnRponseA.getText()); 
+				((QuestionQCM) qu.getQuParam()).getChoiceDescription()[pos]=txtpnRponse.getText();
+				//System.out.println("Réponse "+s+": "+txtpnRponse.getText()); 
 			}
 		});
-		//txtpnRponseA.setText("R\u00E9ponse "+s);
-		txtpnRponseA.setText(" "+((QuestionQCM)qu.getQuParam()).getChoiceDescription()[pos]);
-		add(txtpnRponseA);
+		//txtpnRponse.setText("R\u00E9ponse "+s);
+		txtpnRponse.setText(" "+((QuestionQCM)qu.getQuParam()).getChoiceDescription()[pos]);
+		add(txtpnRponse);
 
 	}
 
