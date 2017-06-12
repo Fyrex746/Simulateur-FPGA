@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 public class CheckAnswer extends JPanel {
 
@@ -33,11 +34,12 @@ public class CheckAnswer extends JPanel {
 		chckbx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=chckbx.isSelected();
+				if(isEditable) ((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=chckbx.isSelected();
+				else ((QuestionQCM) qu.getQuParam()).getSelectedAnswers()[pos]=chckbx.isSelected();
 				//System.out.println("Réponse "+s+": "+chckbx.isSelected());
 			}
 		});
-		chckbx.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
+		if(isEditable)chckbx.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
 		add(chckbx);
 		
 		//JTextPane txtpnRponse = new JTextPane(); //retour a la ligne possible

@@ -3,18 +3,21 @@ package Exam;
 import java.util.Arrays;
 
 public class QuestionQCM extends QuestionParameter {
-	private int numberAnswers=10;
+	private int numberAnswers=3;
 	private Boolean allowMultipleChoice=true;
 	private String[] choiceDescription = new String[getNumberAnswers()];
 	private Boolean[] rightAnswers = new Boolean[getNumberAnswers()];
+	private Boolean[] selectedAnswers = new Boolean[getNumberAnswers()];
 	/**
 	 * @return the numberAnswers
 	 */
 	public QuestionQCM(){
 		rightAnswers = new Boolean[getNumberAnswers()];
+		selectedAnswers = new Boolean[getNumberAnswers()];
 		choiceDescription = new String[getNumberAnswers()];
 		//System.out.println("Réponse:QCM"+getNumberAnswers());
 		Arrays.fill(rightAnswers, Boolean.FALSE);
+		Arrays.fill(selectedAnswers, Boolean.FALSE);
 		for(int i=0;i<getNumberAnswers();i++){
 			choiceDescription[i]="Réponse "+Character.toString((char) (i+65));
 		}
@@ -28,8 +31,10 @@ public class QuestionQCM extends QuestionParameter {
 	public void setNumberAnswers(int numberAnswers) {
 		this.numberAnswers = numberAnswers;
 		rightAnswers = new Boolean[getNumberAnswers()];
+		selectedAnswers = new Boolean[getNumberAnswers()];
 		choiceDescription = new String[getNumberAnswers()];
 		Arrays.fill(rightAnswers, Boolean.FALSE);
+		Arrays.fill(selectedAnswers, Boolean.FALSE);
 		for(int i=0;i<getNumberAnswers();i++){
 			choiceDescription[i]="Réponse "+Character.toString((char) (i+65));
 		}
@@ -59,6 +64,18 @@ public class QuestionQCM extends QuestionParameter {
 	 */
 	public void setRightAnswers(Boolean[] rightAnswers) {
 		this.rightAnswers = rightAnswers;
+	}
+	/**
+	 * @return the selectedAnswers
+	 */
+	public Boolean[] getSelectedAnswers() {
+		return selectedAnswers;
+	}
+	/**
+	 * @param selectedAnswers the selectedAnswers to set
+	 */
+	public void setSelectedAnswers(Boolean[] selectedAnswers) {
+		this.selectedAnswers = selectedAnswers;
 	}
 	/**
 	 * @return the choiceDescription

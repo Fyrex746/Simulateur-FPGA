@@ -35,13 +35,20 @@ public class RadioAnswer extends JPanel {
 		rdbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((QuestionQCM) qu.getQuParam()).setRightAnswers(new Boolean[((QuestionQCM) qu.getQuParam()).getNumberAnswers()]);
-				Arrays.fill(((QuestionQCM) qu.getQuParam()).getRightAnswers(), Boolean.FALSE);
-				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=rdbtn.isSelected();
+				if(isEditable){
+					((QuestionQCM) qu.getQuParam()).setRightAnswers(new Boolean[((QuestionQCM) qu.getQuParam()).getNumberAnswers()]);
+					Arrays.fill(((QuestionQCM) qu.getQuParam()).getRightAnswers(), Boolean.FALSE);
+					((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=rdbtn.isSelected();
+				}
+				else{
+					((QuestionQCM) qu.getQuParam()).setSelectedAnswers(new Boolean[((QuestionQCM) qu.getQuParam()).getNumberAnswers()]);
+					Arrays.fill(((QuestionQCM) qu.getQuParam()).getSelectedAnswers(), Boolean.FALSE);
+					((QuestionQCM) qu.getQuParam()).getSelectedAnswers()[pos]=rdbtn.isSelected();
+				}
 				//System.out.println("Réponse "+s+": "+rdbtn.isSelected());
 			}
 		});
-		rdbtn.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
+		if(isEditable) rdbtn.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
 		add(rdbtn);
 		
 		//JTextPane txtpnRponse = new JTextPane(); //retour a la ligne possible

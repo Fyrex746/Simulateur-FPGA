@@ -89,7 +89,7 @@ public class EnoncePanel extends JPanel {
 		QuNbPanel.add(txtrTitreDeLa);
 		
 		JTextArea enonce = new JTextArea();
-		enonce.setEditable(false);
+		enonce.setEditable(isEditable);
 		enonce.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {

@@ -159,10 +159,12 @@ public class AnswerPanel extends JPanel {
 			txtrTextarea.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyReleased(KeyEvent arg0) {
-					((QuestionText) qu.getQuParam()).setCorrectAnswer(txtrTextarea.getText());
+					if(isEditable) ((QuestionText) qu.getQuParam()).setCorrectAnswer(txtrTextarea.getText());
+					else ((QuestionText) qu.getQuParam()).setStudentAnswer(txtrTextarea.getText());
 				}
 			});
-			txtrTextarea.setText("Entrer la réponse");
+			if(isEditable) txtrTextarea.setText(((QuestionText)qu.getQuParam()).getCorrectAnswer());
+			else txtrTextarea.setText(((QuestionText)qu.getQuParam()).getStudentAnswer());
 			txtrTextarea.setBackground(Color.LIGHT_GRAY);
 			currentPanel=new JPanel();
 			currentPanel.setLayout(new BorderLayout());

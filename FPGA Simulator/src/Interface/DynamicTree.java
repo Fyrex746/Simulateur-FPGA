@@ -65,14 +65,14 @@ public class DynamicTree extends JPanel {
 	private Subject sujet;
 	private JScrollPane scrollPane;
 	
-    public DynamicTree(Subject sujet) {
+    public DynamicTree(Subject sujet, boolean isEditable) {
         super(new GridLayout(1,0));
         this.sujet=sujet;
         rootNode = new DefaultMutableTreeNode("Table des mati\u00E8res");
         treeModel = new DefaultTreeModel(rootNode);
         treeModel.addTreeModelListener(new MyTreeModelListener());
         tree = new JTree(treeModel);
-        tree.setEditable(true);
+        tree.setEditable(isEditable);
         tree.getSelectionModel().setSelectionMode
                 (TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setShowsRootHandles(true);
@@ -194,7 +194,7 @@ public class DynamicTree extends JPanel {
     	    	remove(scrollPane);
     	    	add(scrollPane);
     	    	/*if(SsQuSel==0){
-    	    		JOptionPane.showMessageDialog(null, "Exercice "+ExSel+"\n\t Question "+QuSel);
+    	    		JOptionPane.showMessageDialog(null, "Exercice "+(ExSel-1)+"\n\t Question "+(QuSel-1));
     	    	}
     	    	else{
     	    		JOptionPane.showMessageDialog(null, "Exercice -"+ExSel+"-\n\t Question "+QuSel+"."+SsQuSel);

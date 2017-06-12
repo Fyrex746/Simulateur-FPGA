@@ -60,11 +60,11 @@ public class DynamicTreeDemo extends JPanel
     private static Subject sujet;
     DynamicTree treePanel;
 
-    public DynamicTreeDemo(boolean afficherBoutons,Subject s) {
+    public DynamicTreeDemo(boolean isEditable,Subject s) {
         super(new BorderLayout());
         sujet=s;
         //Create the components.
-        treePanel = new DynamicTree(sujet);
+        treePanel = new DynamicTree(sujet,isEditable);
         populateTree(treePanel);
 
         JButton addButton = new JButton("Ajouter");
@@ -88,7 +88,7 @@ public class DynamicTreeDemo extends JPanel
         JPanel panel = new JPanel(new GridLayout(0,2));
         panel.add(addButton);
         panel.add(removeButton);
-        if(afficherBoutons) add(panel, BorderLayout.SOUTH);
+        if(isEditable) add(panel, BorderLayout.SOUTH);
         treePanel.tree.expandRow(0);
         treePanel.tree.expandRow(1);
     }

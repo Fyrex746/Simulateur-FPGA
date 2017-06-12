@@ -83,7 +83,7 @@ public class FenetreProf extends JFrame {
 		menuBar.add(mnFichiers);
 		
 		mntmNouveau = new JMenuItem("Nouveau");
-		mnFichiers.add(mntmNouveau);
+		if(isEditable) mnFichiers.add(mntmNouveau);
 		mntmNouveau.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -328,7 +328,7 @@ public class FenetreProf extends JFrame {
 	}
 	
 	public void updateQuestionPanel(){
-		//JOptionPane.showMessageDialog(null, "Actualisation panneau de questions");
+		contentPane.remove(questionTotalPanel);
 		questionTotalPanel = new QuestionTotalPanel(sujet.getCurrentQuestion(),isEditable);
 		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
 		revalidate();
