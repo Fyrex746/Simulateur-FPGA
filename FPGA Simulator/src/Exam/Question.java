@@ -18,7 +18,7 @@ public class Question {
 		setQuNb(n);
 		if(answType=="QCM") QuParam = new QuestionQCM();
 		if(answType=="Zone de texte") QuParam = new QuestionText();
-		System.out.println("Exercice "+exercice.getExNb()+" - Question "+n+" créée");
+		//System.out.println("Exercice "+exercice.getExNb()+" - Question "+n+" créée");
 		getExercice().getListQuestions().add(this);
 		//getExercice().setQuestionNb(getQuNb());
 	}

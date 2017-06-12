@@ -13,7 +13,7 @@ public class QuestionQCM extends QuestionParameter {
 	public QuestionQCM(){
 		rightAnswers = new Boolean[getNumberAnswers()];
 		choiceDescription = new String[getNumberAnswers()];
-		System.out.println("Réponse:QCM"+getNumberAnswers());
+		//System.out.println("Réponse:QCM"+getNumberAnswers());
 		Arrays.fill(rightAnswers, Boolean.FALSE);
 		for(int i=0;i<getNumberAnswers();i++){
 			choiceDescription[i]="Réponse "+Character.toString((char) (i+65));
@@ -33,7 +33,7 @@ public class QuestionQCM extends QuestionParameter {
 		for(int i=0;i<getNumberAnswers();i++){
 			choiceDescription[i]="Réponse "+Character.toString((char) (i+65));
 		}
-		System.out.println("Nombre de réponses:"+numberAnswers);
+		//System.out.println("Nombre de réponses:"+numberAnswers);
 	}
 	/**
 	 * @return the allowMultipleChoice
@@ -46,7 +46,7 @@ public class QuestionQCM extends QuestionParameter {
 	 */
 	public void setAllowMultipleChoice(Boolean allowMultipleChoice) {
 		this.allowMultipleChoice = allowMultipleChoice;
-		System.out.println("Réponses multiples:"+allowMultipleChoice);
+		//System.out.println("Réponses multiples:"+allowMultipleChoice);
 	}
 	/**
 	 * @return the rightAnswers

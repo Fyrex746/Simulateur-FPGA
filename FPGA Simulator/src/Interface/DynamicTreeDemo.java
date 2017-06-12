@@ -123,7 +123,8 @@ public class DynamicTreeDemo extends JPanel
         			sujet.getListExercise().add(new Exercise(NbEnfants));}
         		else if (treePanel.tree.getSelectionPath().getPathCount()==2){
         			treePanel.addObject("Question " + NbEnfants);
-        			((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1)).getListQuestions().add(new Question(NbEnfants,((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1))));
+        			//((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1)).getListQuestions().add(new Question(NbEnfants,((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1))));
+        			new Question(NbEnfants,((Exercise) sujet.getListExercise().get(Integer.parseInt(((DefaultMutableTreeNode) treePanel.tree.getLastSelectedPathComponent()).toString().replaceAll("Exercice ", ""))-1)));
         			}
         		/*else if (treePanel.tree.getSelectionPath().getPathCount()==3){ // creation Sous-Question
         			treePanel.addObject("Sous-question " + NbEnfants);

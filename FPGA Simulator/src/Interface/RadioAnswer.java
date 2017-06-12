@@ -38,7 +38,7 @@ public class RadioAnswer extends JPanel {
 				((QuestionQCM) qu.getQuParam()).setRightAnswers(new Boolean[((QuestionQCM) qu.getQuParam()).getNumberAnswers()]);
 				Arrays.fill(((QuestionQCM) qu.getQuParam()).getRightAnswers(), Boolean.FALSE);
 				((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]=rdbtn.isSelected();
-				System.out.println("Réponse "+s+": "+rdbtn.isSelected());
+				//System.out.println("Réponse "+s+": "+rdbtn.isSelected());
 			}
 		});
 		rdbtn.setSelected(((QuestionQCM) qu.getQuParam()).getRightAnswers()[pos]);
@@ -50,7 +50,7 @@ public class RadioAnswer extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				((QuestionQCM) qu.getQuParam()).getChoiceDescription()[pos]=txtpnRponse.getText();
-				System.out.println("Réponse "+s+": "+txtpnRponse.getText()); 
+				//System.out.println("Réponse "+s+": "+txtpnRponse.getText()); 
 			}
 		});
 		//txtpnRponse.setText("R\u00E9ponse "+s);

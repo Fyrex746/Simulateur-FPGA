@@ -82,7 +82,8 @@ public class AnswerPanel extends JPanel {
 		
 		AnswerType = new JComboBox();
 		AnswerType.setMaximumRowCount(3);
-		AnswerType.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte", "R\u00E9ponse sur le simulateur"}));
+		AnswerType.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte"}));
+		//AnswerType.setModel(new DefaultComboBoxModel(new String[] {"QCM", "Zone de texte", "R\u00E9ponse sur le simulateur"})); // dernier choix a ajouter plus tard
 		AnswerType.setSelectedItem(qu.getAnswType());
 		typeReponse = AnswerType.getSelectedItem().toString();
 		AnswerType.addActionListener(new ActionListener() {

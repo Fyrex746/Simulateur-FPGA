@@ -183,7 +183,7 @@ public class SimulatorPanel extends JPanel {
 				SimulatorSettingsPanel.setVisible(false);
 			}
 		});
-		SimulatorSettingsButtonPanel.add(btnModifierLeSimulateur);
+		//SimulatorSettingsButtonPanel.add(btnModifierLeSimulateur); // a ajouter plus tard
 
 		JButton btnRinitialiserSimulateur = new JButton("R\u00E9initialiser ce simulateur");
 		SimulatorSettingsButtonPanel.add(btnRinitialiserSimulateur);

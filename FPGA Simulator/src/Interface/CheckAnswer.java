@@ -46,7 +46,7 @@ public class CheckAnswer extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				((QuestionQCM) qu.getQuParam()).getChoiceDescription()[pos]=txtpnRponseA.getText();
-				System.out.println("Réponse "+s+": "+txtpnRponseA.getText()); 
+				//System.out.println("Réponse "+s+": "+txtpnRponseA.getText()); 
 			}
 		});
 		//txtpnRponseA.setText("R\u00E9ponse "+s);

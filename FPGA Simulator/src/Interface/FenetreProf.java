@@ -6,10 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import Exam.*;
 
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -98,6 +101,33 @@ public class FenetreProf extends JFrame {
 		mntmNouveau.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				contentPane.remove(dynamicTreeDemo);
+				sujet = new Subject();
+				dynamicTreeDemo = new DynamicTreeDemo(true,sujet);
+				dynamicTreeDemo.addContainerListener(new ContainerAdapter() {
+					@Override
+					public void componentAdded(ContainerEvent arg0) {
+						//JOptionPane.showMessageDialog(null, "Actualisation ");
+						updateQuestionPanel();
+					}
+				});
+				dynamicTreeDemo.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mousePressed(MouseEvent arg0) {
+						System.out.println("Mouse");
+						updateQuestionPanel();
+					}
+				});
+				dynamicTreeDemo.addPropertyChangeListener(new PropertyChangeListener() {
+					public void propertyChange(PropertyChangeEvent arg0) {
+						//System.out.println("Property changed");
+						updateQuestionPanel();
+					}
+				});
+				contentPane.add(dynamicTreeDemo, BorderLayout.WEST);
+				revalidate();
+				dynamicTreeDemo.setVisible(false);
+				dynamicTreeDemo.setVisible(true);
 				JOptionPane.showMessageDialog(null, "Ouverture d'un nouveau fichier");
 			}
 		});
@@ -123,11 +153,11 @@ public class FenetreProf extends JFrame {
 		chckbxmntmEnregistrementAuto = new JCheckBoxMenuItem("Enregistrement auto");
 		mnFichiers.add(chckbxmntmEnregistrementAuto);
 		
-		mnModifier = new JMenu("Modifier");
-		menuBar.add(mnModifier);
+		mnModifier = new JMenu("Modifier"); //a ajouter plus tard
+		//menuBar.add(mnModifier);
 		
 		mntmModifierLeFormulaire = new JMenuItem("Modifier le formulaire de contact");
-		mnModifier.add(mntmModifierLeFormulaire);
+		//mnModifier.add(mntmModifierLeFormulaire);
 		mntmModifierLeFormulaire.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -139,11 +169,24 @@ public class FenetreProf extends JFrame {
 		menuBar.add(mnMode);
 		
 		rdbtnmntmExercice = new JRadioButtonMenuItem("Exercice");
-		rdbtnmntmExercice.setSelected(true);
+		rdbtnmntmExercice.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sujet.setExamMode(rdbtnmntmExamen.isSelected());
+			}
+		});
+		rdbtnmntmExercice.setSelected(!sujet.isExamMode());
 		ExMode.add(rdbtnmntmExercice);
 		mnMode.add(rdbtnmntmExercice);
 		
 		rdbtnmntmExamen = new JRadioButtonMenuItem("Examen");
+		rdbtnmntmExamen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sujet.setExamMode(rdbtnmntmExamen.isSelected());
+			}
+		});
+		rdbtnmntmExamen.setSelected(sujet.isExamMode());
 		ExMode.add(rdbtnmntmExamen);
 		mnMode.add(rdbtnmntmExamen);
 		
@@ -181,21 +224,42 @@ public class FenetreProf extends JFrame {
 		TimerPanel.add(lblMinuteur);
 		
 		hSpinner = new JSpinner();
-		hSpinner.setModel(new SpinnerNumberModel(0, 0, 23, 1));
+		hSpinner.setModel(new SpinnerNumberModel(sujet.getTimerH(), 0, 23, 1));
+		hSpinner.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				sujet.setTimerH((int) hSpinner.getValue());
+				//JOptionPane.showMessageDialog(null,((int) hSpinner.getValue()));
+			}      
+		});
 		TimerPanel.add(hSpinner);
 		
 		lblH = new JLabel("h");
 		TimerPanel.add(lblH);
 		
 		minSpinner = new JSpinner();
-		minSpinner.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+		minSpinner.setModel(new SpinnerNumberModel(sujet.getTimerMin(), 0, 59, 1));
+		minSpinner.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				sujet.setTimerMin((int) minSpinner.getValue());
+				//JOptionPane.showMessageDialog(null,((int) minSpinner.getValue()));
+			}      
+		});
 		TimerPanel.add(minSpinner);
 		
 		lblMin = new JLabel("min");
 		TimerPanel.add(lblMin);
 		
 		sSpinner = new JSpinner();
-		sSpinner.setModel(new SpinnerNumberModel(30, 0, 59, 1));
+		sSpinner.setModel(new SpinnerNumberModel(sujet.getTimerSec(), 0, 59, 1));
+		sSpinner.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				sujet.setTimerSec((int) sSpinner.getValue());
+				//JOptionPane.showMessageDialog(null, ((int) sSpinner.getValue()));
+			}      
+		});
 		TimerPanel.add(sSpinner);
 		
 		lblS = new JLabel("s");
@@ -234,13 +298,9 @@ public class FenetreProf extends JFrame {
 	
 	public void updateQuestionPanel(){
 		//JOptionPane.showMessageDialog(null, "Actualisation panneau de questions");
-		contentPane.remove(questionTotalPanel);
 		questionTotalPanel = new QuestionTotalPanel(sujet.getCurrentQuestion());
 		contentPane.add(questionTotalPanel, BorderLayout.CENTER);
 		revalidate();
-		repaint();
-		/*setVisible(false);
-		setVisible(true);//*/
 	}
 
 }

@@ -10,7 +10,7 @@ public class Exercise {
 		this(1);
 	}//*/
 	public Exercise(int n){
-		System.out.println("Nouvel exercice "+n);
+		//System.out.println("Exercice "+n+" créé");
 		setExNb(n);
 	}
 	
