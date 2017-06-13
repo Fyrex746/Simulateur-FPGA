@@ -16,9 +16,7 @@ public class SimulatorAnswerDynamicPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	/*public SimulatorAnswerDynamicPanel(){
-		this(new Question());
-	}//*/
+
 	public SimulatorAnswerDynamicPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		

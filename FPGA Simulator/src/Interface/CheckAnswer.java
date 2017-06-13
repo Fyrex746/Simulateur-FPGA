@@ -22,9 +22,7 @@ public class CheckAnswer extends JPanel {
 	 * Create the panel.
 	 */
 	private int pos;
-	/*public CheckAnswer() {
-		this("A",new Question());
-	}*/
+
 	public CheckAnswer(String s, Question qu,boolean isEditable) {
 		pos=(int) s.charAt(0)-65;
 		FlowLayout flowLayout = (FlowLayout) getLayout();
@@ -52,7 +50,6 @@ public class CheckAnswer extends JPanel {
 				//System.out.println("Réponse "+s+": "+txtpnRponse.getText()); 
 			}
 		});
-		//txtpnRponse.setText("R\u00E9ponse "+s);
 		txtpnRponse.setText(" "+((QuestionQCM)qu.getQuParam()).getChoiceDescription()[pos]);
 		add(txtpnRponse);
 

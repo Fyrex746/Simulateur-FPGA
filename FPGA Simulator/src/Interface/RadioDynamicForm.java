@@ -13,9 +13,7 @@ public class RadioDynamicForm extends JPanel {
 	 * Create the panel.
 	 */
 	private final ButtonGroup Answers = new ButtonGroup();
-	/*public RadioDynamicForm() {
-		this(3, new Question());
-	}*/
+
 	public RadioDynamicForm(int NbAnsw, Question qu, boolean isEditable) {
 		setLayout(new GridLayout(NbAnsw, 1, 0, 0));
 		for(int i=0;i<NbAnsw;i++){

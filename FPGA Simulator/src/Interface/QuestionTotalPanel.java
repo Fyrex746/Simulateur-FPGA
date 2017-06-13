@@ -16,9 +16,7 @@ public class QuestionTotalPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	/*public QuestionTotalPanel() {
-		this(new Question());
-	}*/
+
 	public QuestionTotalPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		

@@ -44,10 +44,7 @@ public class AnswerPanel extends JPanel {
 	private JCheckBox chckbxRponsesMultiples;
 	private JPanel currentPanel;
 	private JScrollPane jsp;
-	
-	/*public AnswerPanel(){
-		this(3, new Question());
-	}*/
+
 	public AnswerPanel(Question qu, boolean isEditable) {
 		if(qu.getAnswType()=="QCM") NbPossibleAns=((QuestionQCM)qu.getQuParam()).getNumberAnswers();
 		setLayout(new BorderLayout(0, 0));

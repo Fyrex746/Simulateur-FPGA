@@ -26,9 +26,6 @@ public class EnoncePanel extends JPanel {
 	 * Create the panel.
 	 */
 	
-	/*public EnoncePanel() {
-		this(1,1,0, new Question());
-	}*/
 	public EnoncePanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -100,8 +97,7 @@ public class EnoncePanel extends JPanel {
 		enonce.setText(qu.getDescription());
 		enonce.setLineWrap(true);
 		enonce.setWrapStyleWord(true);
-		//add(enonce, BorderLayout.CENTER);
-
+		
 		JScrollPane jsp = new JScrollPane (enonce);
 		jsp.setPreferredSize(new Dimension(10,50));
 		jsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);

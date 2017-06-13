@@ -9,10 +9,7 @@ public class Question {
 	/**
 	 * @return the exercice
 	 */
-	
-	/*public Question(){
-		this(1, new Exercise());
-	}//*/
+
 	public Question(int n, Exercise exo){
 		exercice=exo;
 		setQuNb(n);

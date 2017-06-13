@@ -37,12 +37,6 @@ public class SimulatorPanel extends JPanel {
 	private JTabbedPane SimulatorChoicePanel;
 	boolean isActive=true;
 	
-	/*public SimulatorPanel() {
-		this(new Question(),true);
-	}*/
-	/*public SimulatorPanel(Question qu){
-		this(qu, true);
-	}//*/
 	public SimulatorPanel(Question qu,boolean isEditable) {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -74,24 +68,35 @@ public class SimulatorPanel extends JPanel {
 		
 		SimulatorChoicePanel = new JTabbedPane(JTabbedPane.TOP);
 		add(SimulatorChoicePanel, BorderLayout.CENTER);
-		txtL = new JTextField();
-		SimulatorChoicePanel.addTab("Etat initial", null, txtL, null);
-		txtL.setHorizontalAlignment(SwingConstants.CENTER);
-		txtL.setForeground(new Color(255, 255, 255));
-		txtL.setBackground(new Color(0, 51, 204));
-		txtL.setSelectedTextColor(Color.CYAN);
-		txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
-		txtL.setColumns(10);
+		if(isEditable){
+			txtL = new JTextField();
+			SimulatorChoicePanel.addTab("Etat initial", null, txtL, null);
+			txtL.setHorizontalAlignment(SwingConstants.CENTER);
+			txtL.setForeground(new Color(255, 255, 255));
+			txtL.setBackground(new Color(0, 51, 204));
+			txtL.setSelectedTextColor(Color.CYAN);
+			txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
+			txtL.setColumns(10);
 
-		textField = new JTextField();
-		SimulatorChoicePanel.addTab("R\u00E9sultat attendu", null, textField, null);
-		textField.setText("Simulateur \u00E0 ins\u00E9rer ici");
-		textField.setSelectedTextColor(Color.CYAN);
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setForeground(Color.BLACK);
-		textField.setColumns(10);
-		textField.setBackground(Color.GREEN);
-		
+			textField = new JTextField();
+			SimulatorChoicePanel.addTab("R\u00E9sultat attendu", null, textField, null);
+			textField.setText("Simulateur \u00E0 ins\u00E9rer ici");
+			textField.setSelectedTextColor(Color.CYAN);
+			textField.setHorizontalAlignment(SwingConstants.CENTER);
+			textField.setForeground(Color.BLACK);
+			textField.setColumns(10);
+			textField.setBackground(Color.GREEN);			
+		}
+		else{
+			txtL = new JTextField();
+			SimulatorChoicePanel.addTab("Simulateur r\u00E9ponse", null, txtL, null);
+			txtL.setHorizontalAlignment(SwingConstants.CENTER);
+			txtL.setForeground(new Color(255, 255, 255));
+			txtL.setBackground(new Color(0, 51, 204));
+			txtL.setSelectedTextColor(Color.CYAN);
+			txtL.setText("Simulateur \u00E0 ins\u00E9rer ici");
+			txtL.setColumns(10);
+		}
 		
 		//------------------------------------------------------------------------------
 		JPanel SimulatorSettingsPanel = new JPanel();
